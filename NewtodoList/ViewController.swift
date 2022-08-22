@@ -19,6 +19,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         super.viewDidLoad()
        title = "To do list📝"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
+        tableView.delegate = self
+        
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -42,15 +44,49 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+        
         return .delete
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let alert = UIAlertController(title: "New task", message: "Add a new task", preferredStyle: .alert)
+        let editAlert = UIAlertController(title: "edit task📝", message: "Edit task", preferredStyle: .alert)
         
-        present(alert, animated: true)
+        let saveAction = UIAlertAction(title: "Save", style: .default){
+            [unowned self] action in
+            
+            guard let textField = editAlert.textFields?.first, let taskToUpdate = textField.text else{
+                return
+            }
+           
+            UpdateTasks(taskToUpdate: taskToUpdate, indexPath: indexPath)
+            self.tableView.reloadData()
+        }
+       
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        editAlert.addTextField()
+        editAlert.addAction(saveAction)
+        editAlert.addAction(cancelAction)
+        present(editAlert, animated: true)
     }
     
+    func UpdateTasks(taskToUpdate:String, indexPath:IndexPath){
+        let appDelegate = UIApplication.shared.delegate as? AppDelegate
+        let context = appDelegate?.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "NewTask")
+        
+        do{
+            let results = try context?.fetch(fetchRequest) as? [NSManagedObject]
+            results?[indexPath.row].setValue(taskToUpdate, forKey: "task")
+        }catch{
+            print("Fetch failed")
+        }
+        
+        do{
+            try context?.save()
+        }catch{
+            print("Save failed")
+        }
+    }
+   
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let commit = newtasks[indexPath.row]
@@ -65,10 +101,21 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
            
         }
     }
+    /* this following function works, you can add an edit button and delete a cell, but it needs some work
+     
+    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let editAction = UITableViewRowAction(style: .default, title: "edit") {(action, indexPath) in
+            
+        }
+        
+        let deleteAction = UITableViewRowAction(style: .default, title: "del"){(action, indexPath) in
+            
+        }
+        
+        return [editAction,deleteAction]
+    }
     
-  
-    
-    
+    */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         newtasks.count
