@@ -13,51 +13,89 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
 
     @IBOutlet weak var tableView: UITableView!
     
-    var newtasks:[NSManagedObject] = []
+  
+    
+    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    private var models = [NewTask]()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getAllItems()
        title = "To do list📝"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
+        tableView.dataSource = self
         
     }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
-            return
+    
+    func getAllItems(){
+        do{
+             models = try context.fetch(NewTask.fetchRequest())
+            
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }catch{
+            print("Error fetching data")
         }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "NewTask")
+    }
+    
+    func createItem(task:String){
+        let newItem = NewTask(context: context)
+        newItem.task = task
+        newItem.done = false
         
         do{
-            newtasks = try managedContext.fetch(fetchRequest)
-        }catch let error as NSError{
-            print("Could not fetch data... \(error), \(error.userInfo)")
+            try context.save()
+            getAllItems()
+            tableView.reloadData()
+        }catch{
+          print("error saving")
+        }
+        print(newItem.done)
+    }
+    
+    func deleteItem(item:NewTask){
+        context.delete(item)
+        
+        do{
+            try context.save()
+        }catch{
             
         }
-        
     }
+    
+    func updateItem(item:NewTask, newTaskName:String){
+        item.task = newTaskName
+        
+        do{
+            try context.save()
+        }catch{
+            
+        }
+    }
+
+ 
     
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
         
         return .delete
     }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let editAlert = UIAlertController(title: "edit task📝", message: "Edit task", preferredStyle: .alert)
-        
+        let item = models[indexPath.row]
         let saveAction = UIAlertAction(title: "Save", style: .default){
             [unowned self] action in
+            
             
             guard let textField = editAlert.textFields?.first, let taskToUpdate = textField.text else{
                 return
             }
            
-            UpdateTasks(taskToUpdate: taskToUpdate, indexPath: indexPath)
+            
+            self.updateItem(item: item, newTaskName: taskToUpdate)
             self.tableView.reloadData()
         }
        
@@ -68,30 +106,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         present(editAlert, animated: true)
     }
     
-    func UpdateTasks(taskToUpdate:String, indexPath:IndexPath){
-        let appDelegate = UIApplication.shared.delegate as? AppDelegate
-        let context = appDelegate?.persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: "NewTask")
-        
-        do{
-            let results = try context?.fetch(fetchRequest) as? [NSManagedObject]
-            results?[indexPath.row].setValue(taskToUpdate, forKey: "task")
-        }catch{
-            print("Fetch failed")
-        }
-        
-        do{
-            try context?.save()
-        }catch{
-            print("Save failed")
-        }
-    }
    
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let commit = newtasks[indexPath.row]
+            let commit = models[indexPath.row]
             commit.managedObjectContext?.delete(commit)
-            newtasks.remove(at: indexPath.row)
+            models.remove(at: indexPath.row)
             tableView.deleteRows(at: [indexPath], with: .fade)
             do{
                 try commit.managedObjectContext?.save()
@@ -101,33 +121,18 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
            
         }
     }
-    /* this following function works, you can add an edit button and delete a cell, but it needs some work
-     
-    func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
-        let editAction = UITableViewRowAction(style: .default, title: "edit") {(action, indexPath) in
-            
-        }
-        
-        let deleteAction = UITableViewRowAction(style: .default, title: "del"){(action, indexPath) in
-            
-        }
-        
-        return [editAction,deleteAction]
-    }
-    
-    */
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        newtasks.count
+        models.count
     }
     
     
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
-        let task = newtasks[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = task.value(forKey: "task") as? String
-
-        return cell
+        let model = models[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
+       // cell.textLabel?.text = task.value(forKey: "task") as? String
+        cell?.setUpCell(task: model.task!)
+        return cell!
     }
     
     
@@ -141,7 +146,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                 return
             }
            
-            self.save(task:taskToSave)
+            self.createItem(task: taskToSave)
             self.tableView.reloadData()
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
@@ -151,28 +156,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         present(alert, animated: true)
     }
     
-    func save(task:String){
-        
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else{
-            return
-        }
-        
-        let managedContext = appDelegate.persistentContainer.viewContext
-        
-        let entity = NSEntityDescription.entity(forEntityName: "NewTask", in: managedContext)!
-        
-        let tasks = NSManagedObject(entity: entity, insertInto: managedContext)
-        
-        tasks.setValue(task, forKey: "task")
-        
-        do{
-            try managedContext.save()
-            newtasks.append(tasks)
-        }catch let error as NSError{
-            print("Couldn't save... \(error), \(error.userInfo)")
-        }
-        
-    }
+   
     
 }
 
