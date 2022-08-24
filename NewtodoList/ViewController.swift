@@ -28,7 +28,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
-        
+        tableView.reloadData()
        
     }
     
@@ -80,7 +80,16 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         }
     }
 
- 
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let item = models[indexPath.row]
+        
+        if item.isArchived{
+            return 0
+        } else {
+            return 100
+        }
+        
+    }
    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete"){ (action, view, completionHandler) in
@@ -100,6 +109,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             let commit = self.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
+            tableView.reloadData()
             do{
                 try commit.managedObjectContext?.save()
             } catch {
@@ -186,6 +196,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             
         }
     }
+    
+    
     
 }
 

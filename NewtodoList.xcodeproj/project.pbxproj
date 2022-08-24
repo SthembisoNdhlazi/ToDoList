@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B878865C28B6247B0057D719 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B878865B28B6247B0057D719 /* ArchiveViewController.swift */; };
 		B8AB785D28AFFC8B00DDFE8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB785C28AFFC8B00DDFE8C /* AppDelegate.swift */; };
 		B8AB785F28AFFC8B00DDFE8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB785E28AFFC8B00DDFE8C /* SceneDelegate.swift */; };
 		B8AB786128AFFC8B00DDFE8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB786028AFFC8B00DDFE8C /* ViewController.swift */; };
@@ -20,6 +21,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B878865B28B6247B0057D719 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
 		B8AB785928AFFC8B00DDFE8C /* NewtodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewtodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8AB785C28AFFC8B00DDFE8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8AB785E28AFFC8B00DDFE8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				B8AB785E28AFFC8B00DDFE8C /* SceneDelegate.swift */,
 				B8AB786028AFFC8B00DDFE8C /* ViewController.swift */,
 				B8AB786228AFFC8B00DDFE8C /* Main.storyboard */,
+				B878865B28B6247B0057D719 /* ArchiveViewController.swift */,
 				B8AB787328B3F8C900DDFE8C /* CustomTableViewCell.swift */,
 				B8AB786828AFFC9100DDFE8C /* Assets.xcassets */,
 				B8AB786A28AFFC9100DDFE8C /* LaunchScreen.storyboard */,
@@ -157,6 +160,7 @@
 				B8AB787D28B4F21000DDFE8C /* NewTask+CoreDataProperties.swift in Sources */,
 				B8AB785D28AFFC8B00DDFE8C /* AppDelegate.swift in Sources */,
 				B8AB785F28AFFC8B00DDFE8C /* SceneDelegate.swift in Sources */,
+				B878865C28B6247B0057D719 /* ArchiveViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
