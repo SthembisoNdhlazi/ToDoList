@@ -7,20 +7,32 @@
 
 import UIKit
 
+protocol isDone{
+    func toggleIsDone(for cell:UITableViewCell)
+}
+
+
 class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellLabel: UILabel!
     
     @IBOutlet weak var checkButton: UIButton!
     
+    var isDoneDelegate:isDone?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
     }
-    func setUpCell(task:String){
+    let models = [NewTask]()
+    func setUpCell(task:String, isDone:Bool){
         cellLabel.text = task
         
+        if isDone{
+            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+        } else{
+            checkButton.setImage(UIImage(systemName: "circlebadge"), for: .normal)
+        }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
@@ -29,12 +41,10 @@ class CustomTableViewCell: UITableViewCell {
     }
     @IBAction func isCheckedTapped(_ sender: Any) {
         
-        if checkButton.currentImage == UIImage(named: "circleBadge"){
-            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
-        }
-        if checkButton.currentImage == UIImage(named: "checkmark"){
-            checkButton.setImage(UIImage(systemName: "circleBadge"), for: .normal)
-        }
+        print("tapped")
+        
+        isDoneDelegate?.toggleIsDone(for: self)
+        
         
         
     }

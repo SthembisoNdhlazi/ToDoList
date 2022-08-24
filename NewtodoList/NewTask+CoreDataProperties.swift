@@ -13,6 +13,7 @@ import CoreData
 extension NewTask {
 
     @nonobjc public class func fetchRequest() -> NSFetchRequest<NewTask> {
+        
         return NSFetchRequest<NewTask>(entityName: "NewTask")
     }
 

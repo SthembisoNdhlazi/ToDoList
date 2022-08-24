@@ -16,6 +16,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
   
     
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    
     private var models = [NewTask]()
     
     
@@ -36,6 +37,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
+            
         }catch{
             print("Error fetching data")
         }
@@ -84,8 +86,9 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let editAlert = UIAlertController(title: "edit task📝", message: "Edit task", preferredStyle: .alert)
+      
         let item = models[indexPath.row]
+        let editAlert = UIAlertController(title: "edit task📝", message: "\(item.task!)", preferredStyle: .alert)
         let saveAction = UIAlertAction(title: "Save", style: .default){
             [unowned self] action in
             
@@ -131,7 +134,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        // cell.textLabel?.text = task.value(forKey: "task") as? String
-        cell?.setUpCell(task: model.task!)
+        cell?.setUpCell(task: model.task!,isDone: model.done)
+        cell?.isDoneDelegate = self
         return cell!
     }
     
@@ -156,7 +160,25 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         present(alert, animated: true)
     }
     
-   
+    func toggleDone(for index:Int){
+        
+        
+        models[index].done.toggle()
+        do{
+            try context.save()
+        }catch{
+            
+        }
+    }
     
+}
+
+extension ViewController:isDone{
+    func toggleIsDone(for cell: UITableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell){
+            toggleDone(for: indexPath.row)
+            tableView.reloadData()
+        }
+    }
 }
 
