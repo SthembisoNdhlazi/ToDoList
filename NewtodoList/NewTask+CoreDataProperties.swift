@@ -19,7 +19,7 @@ extension NewTask {
 
     @NSManaged public var task: String?
     @NSManaged public var done: Bool
-
+    @NSManaged public var isArchived:Bool
 }
 
 extension NewTask : Identifiable {

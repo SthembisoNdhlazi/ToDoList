@@ -20,6 +20,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     private var models = [NewTask]()
     
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllItems()
@@ -28,6 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.delegate = self
         tableView.dataSource = self
         
+       
     }
     
     func getAllItems(){
@@ -47,7 +49,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let newItem = NewTask(context: context)
         newItem.task = task
         newItem.done = false
-        
+        newItem.isArchived = false
         do{
             try context.save()
             getAllItems()
@@ -79,12 +81,40 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
 
  
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCell.EditingStyle {
+   
+    func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        let delete = UIContextualAction(style: .normal, title: "Delete"){ (action, view, completionHandler) in
+            
+            let commit = self.models[indexPath.row]
+            commit.managedObjectContext?.delete(commit)
+            self.models.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+            do{
+                try commit.managedObjectContext?.save()
+            } catch {
+                print("Couldn't save")
+            }
+        }
+        let archive = UIContextualAction(style: .normal, title: "Archive"){ (action, view, completionHandler) in
+            
+            let commit = self.models[indexPath.row]
+            commit.isArchived.toggle()
+            print(commit.isArchived)
+            do{
+                try commit.managedObjectContext?.save()
+            } catch {
+                print("Couldn't save")
+            }
+        }
         
-        return .delete
+        archive.backgroundColor = .blue
+        delete.image = UIImage(systemName: "trash")
+        delete.backgroundColor = .red
+        //swipe action to return
+        let swipe = UISwipeActionsConfiguration(actions: [delete,archive])
+        return swipe
+        
     }
-    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
         let item = models[indexPath.row]
@@ -110,22 +140,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            let commit = models[indexPath.row]
-            commit.managedObjectContext?.delete(commit)
-            models.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            do{
-                try commit.managedObjectContext?.save()
-            } catch {
-                print("Couldn't save")
-            }
-           
-        }
-    }
-    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        
         models.count
     }
     
@@ -133,7 +149,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
         let model = models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
-       // cell.textLabel?.text = task.value(forKey: "task") as? String
+       
         cell?.setUpCell(task: model.task!,isDone: model.done)
         cell?.isDoneDelegate = self
         return cell!
