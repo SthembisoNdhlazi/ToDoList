@@ -37,9 +37,9 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aUa-o3-jRh">
-                                                    <rect key="frame" x="353" y="31" width="41" height="31"/>
+                                                    <rect key="frame" x="349" y="31" width="45" height="31"/>
                                                     <state key="normal" title="Button"/>
-                                                    <buttonConfiguration key="configuration" style="plain" image="circlebadge" catalog="system"/>
+                                                    <buttonConfiguration key="configuration" style="plain" image="circle" catalog="system"/>
                                                     <connections>
                                                         <action selector="isCheckedTapped:" destination="FD4-Rg-kBC" eventType="touchUpInside" id="jLy-BS-iAI"/>
                                                     </connections>
@@ -193,6 +193,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="circle" catalog="system" width="128" height="121"/>
         <image name="circlebadge" catalog="system" width="128" height="120"/>
         <image name="note.text" catalog="system" width="128" height="106"/>
         <systemColor name="systemBackgroundColor">

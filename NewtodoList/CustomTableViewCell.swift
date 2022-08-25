@@ -29,9 +29,9 @@ class CustomTableViewCell: UITableViewCell {
         cellLabel.text = task
         
         if isDone{
-            checkButton.setImage(UIImage(systemName: "checkmark"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
         } else{
-            checkButton.setImage(UIImage(systemName: "circlebadge"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
     }
     override func setSelected(_ selected: Bool, animated: Bool) {

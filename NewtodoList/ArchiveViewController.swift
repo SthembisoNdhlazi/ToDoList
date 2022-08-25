@@ -24,7 +24,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.backgroundView = UIImageView(image: UIImage(systemName: "pencil"))
+      
     }
     
     func getAllItems(){

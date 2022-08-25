@@ -24,12 +24,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     override func viewDidLoad() {
         super.viewDidLoad()
         getAllItems()
-       title = "To do list📝"
+       title = "To do list"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
-        tableView.backgroundView = UIImageView(image: UIImage(systemName: "pencil"))
+        
     }
     
     func getAllItems(){
