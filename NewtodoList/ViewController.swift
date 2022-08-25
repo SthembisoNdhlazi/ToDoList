@@ -29,7 +29,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.delegate = self
         tableView.dataSource = self
         tableView.reloadData()
-       
+        tableView.backgroundView = UIImageView(image: UIImage(systemName: "pencil"))
     }
     
     func getAllItems(){
@@ -93,17 +93,30 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete"){ (action, view, completionHandler) in
+            let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this task?", preferredStyle: .alert)
             
-            let commit = self.models[indexPath.row]
-            commit.managedObjectContext?.delete(commit)
-            self.models.remove(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-            do{
-                try commit.managedObjectContext?.save()
-            } catch {
-                print("Couldn't save")
+            let deleteAction = UIAlertAction(title: "Yes", style: .default){
+                [unowned self] action in
+                
+                let commit = self.models[indexPath.row]
+                commit.managedObjectContext?.delete(commit)
+                self.models.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .fade)
+                do{
+                    try commit.managedObjectContext?.save()
+                } catch {
+                    print("Couldn't save")
+                }
+                
+            
             }
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+            deleteAlert.addAction(deleteAction)
+            deleteAlert.addAction(cancelAction)
+            
+            self.present(deleteAlert, animated: true)
         }
+        
         let archive = UIContextualAction(style: .normal, title: "Archive"){ (action, view, completionHandler) in
             
             let commit = self.models[indexPath.row]
