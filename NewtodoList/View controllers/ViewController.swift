@@ -33,6 +33,10 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
        // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+    }
+    
     func getAllItems(){
       
         
@@ -143,27 +147,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
-        let item = models[indexPath.row]
-        let editAlert = UIAlertController(title: "edit task📝", message: "\(item.task!)", preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default){
-            [unowned self] action in
-            
-            
-            guard let textField = editAlert.textFields?.first, let taskToUpdate = textField.text else{
-                return
-            }
-           
-            
-            self.updateItem(item: item, newTaskName: taskToUpdate)
-            self.tableView.reloadData()
-        }
-       
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        editAlert.addTextField()
-        editAlert.addAction(saveAction)
-        editAlert.addAction(cancelAction)
-        present(editAlert, animated: true)
+    performSegue(withIdentifier: "viewTask", sender: indexPath)
     }
     
    
@@ -214,7 +198,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         }
     }
     
-    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? EditVC{
+            destination.indexPath = tableView.indexPathForSelectedRow?.row
+            
+        }
+    }
     
 }
 

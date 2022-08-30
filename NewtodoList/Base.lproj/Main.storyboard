@@ -93,11 +93,67 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="i7u-Lt-e1f" id="Sli-p3-dAI"/>
+                        <segue destination="szO-1m-puP" kind="show" identifier="viewTask" id="re7-I4-itO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="928.98550724637687" y="67.633928571428569"/>
+        </scene>
+        <!--EditVC-->
+        <scene sceneID="mmI-jS-dld">
+            <objects>
+                <viewController id="szO-1m-puP" customClass="EditVC" customModule="NewtodoList" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="YaO-Jz-BF4">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Edit this task" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hh3-HO-B9g">
+                                <rect key="frame" x="20" y="140" width="137" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="25"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JJM-Bm-6so">
+                                <rect key="frame" x="20" y="190" width="374" height="34"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vfl-tv-WiC">
+                                <rect key="frame" x="134" y="274" width="146" height="61"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="146" id="A1l-2o-LfU"/>
+                                    <constraint firstAttribute="height" constant="61" id="h5x-QU-EsP"/>
+                                </constraints>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="tinted" title="Save changes"/>
+                                <connections>
+                                    <action selector="saveTapped:" destination="szO-1m-puP" eventType="touchUpInside" id="Woz-In-ntk"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Rxb-dr-Rsu"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="JJM-Bm-6so" firstAttribute="top" secondItem="hh3-HO-B9g" secondAttribute="bottom" constant="20" id="55I-Bh-Ooo"/>
+                            <constraint firstItem="hh3-HO-B9g" firstAttribute="leading" secondItem="Rxb-dr-Rsu" secondAttribute="leading" constant="20" id="C3U-J1-M2c"/>
+                            <constraint firstItem="Rxb-dr-Rsu" firstAttribute="bottom" secondItem="Vfl-tv-WiC" secondAttribute="bottom" constant="527" id="Csp-PQ-wzE"/>
+                            <constraint firstItem="hh3-HO-B9g" firstAttribute="top" secondItem="Rxb-dr-Rsu" secondAttribute="top" id="E4b-Lv-a2d"/>
+                            <constraint firstItem="Rxb-dr-Rsu" firstAttribute="trailing" secondItem="Vfl-tv-WiC" secondAttribute="trailing" constant="134" id="Zo5-nh-Jjk"/>
+                            <constraint firstItem="JJM-Bm-6so" firstAttribute="leading" secondItem="Rxb-dr-Rsu" secondAttribute="leading" constant="20" id="hdO-kh-hQe"/>
+                            <constraint firstItem="Vfl-tv-WiC" firstAttribute="top" secondItem="JJM-Bm-6so" secondAttribute="bottom" constant="50" id="rmp-kL-8zU"/>
+                            <constraint firstItem="Rxb-dr-Rsu" firstAttribute="trailing" secondItem="JJM-Bm-6so" secondAttribute="trailing" constant="20" id="tau-Mh-aPe"/>
+                            <constraint firstItem="Vfl-tv-WiC" firstAttribute="leading" secondItem="Rxb-dr-Rsu" secondAttribute="leading" constant="134" id="zOf-Ke-lnr"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="Fo6-uE-bQJ"/>
+                    <connections>
+                        <outlet property="text" destination="JJM-Bm-6so" id="5Uv-fC-sGT"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2eD-dk-s7S" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1828.985507246377" y="67.633928571428569"/>
         </scene>
         <!--Archive-->
         <scene sceneID="MeR-Pl-fEt">
