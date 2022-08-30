@@ -30,11 +30,14 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.dataSource = self
         tableView.reloadData()
         
+       // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
     }
     
     func getAllItems(){
+      
+        
         do{
-             models = try context.fetch(NewTask.fetchRequest())
+            models = try context.fetch(NewTask.fetchRequest())
             
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -142,6 +145,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
       
         let item = models[indexPath.row]
         let editAlert = UIAlertController(title: "edit task📝", message: "\(item.task!)", preferredStyle: .alert)
+        
         let saveAction = UIAlertAction(title: "Save", style: .default){
             [unowned self] action in
             
