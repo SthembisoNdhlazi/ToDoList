@@ -24,8 +24,10 @@ class CustomTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
     }
+    
     let models = [NewTask]()
-    func setUpCell(task:String, isDone:Bool){
+    
+    func setUpCell(task: String, isDone: Bool){
         cellLabel.text = task
         
         if isDone{
@@ -34,6 +36,7 @@ class CustomTableViewCell: UITableViewCell {
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
     }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

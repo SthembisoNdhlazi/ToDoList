@@ -28,10 +28,7 @@ class EditVC: UIViewController {
         
         updateItem(item: item, newTaskName: taskToUpdate!)
         
-        let savedAlert = UIAlertController(title: "Done", message: "The task has been saved", preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        savedAlert.addAction(cancelAction)
-        //present(savedAlert, animated: true)
+     
         self.navigationController?.popToRootViewController( animated: true)
         
     }

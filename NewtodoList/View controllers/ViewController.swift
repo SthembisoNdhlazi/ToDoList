@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        getAllItems()
         tableView.reloadData()
     }
     
@@ -159,6 +160,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
         let model = models[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        
         cell?.setUpCell(task: model.task!,isDone: model.done)
@@ -168,27 +170,10 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
-        let alert = UIAlertController(title: "New task", message: "Add a new task", preferredStyle: .alert)
-        
-        let saveAction = UIAlertAction(title: "Save", style: .default){
-            [unowned self] action in
-            
-            guard let textField = alert.textFields?.first, let taskToSave = textField.text else{
-                return
-            }
-           
-            self.createItem(task: taskToSave)
-            self.tableView.reloadData()
-        }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
-        alert.addTextField()
-        alert.addAction(saveAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
+       
     }
     
     func toggleDone(for index:Int){
-        
         
         models[index].done.toggle()
         do{
@@ -207,7 +192,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
 }
 
-extension ViewController:isDone{
+extension ViewController: isDone{
+    
     func toggleIsDone(for cell: UITableViewCell) {
         if let indexPath = tableView.indexPath(for: cell){
             toggleDone(for: indexPath.row)
