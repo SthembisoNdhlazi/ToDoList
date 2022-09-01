@@ -25,15 +25,15 @@ class CustomTableViewCell: UITableViewCell {
         // Initialization code
     }
     
-    let models = [NewTask]()
+   
     
     func setUpCell(task: String, isDone: Bool){
         cellLabel.text = task
         
         if isDone{
-            checkButton.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "checkmark.circle")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
         } else{
-            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
+            checkButton.setImage(UIImage(systemName: "circle")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
         }
     }
     

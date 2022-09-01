@@ -7,6 +7,7 @@
 
 import UIKit
 import CoreData
+import SwiftUI
 
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource{
    
@@ -14,16 +15,14 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     @IBOutlet weak var tableView: UITableView!
     
   
-    
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-    
-    private var models = [NewTask]()
+    let dataProvider = DataProvider()
     
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getAllItems()
+        dataProvider.getAllItems()
+        
        title = "To do list"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
@@ -34,62 +33,17 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        getAllItems()
+        dataProvider.getAllItems()
         tableView.reloadData()
     }
     
-    func getAllItems(){
-      
-        
-        do{
-            models = try context.fetch(NewTask.fetchRequest())
-            
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-            
-        }catch{
-            print("Error fetching data")
-        }
+    override func viewWillDisappear(_ animated: Bool) {
+        print("Gone...")
     }
     
-    func createItem(task:String){
-        let newItem = NewTask(context: context)
-        newItem.task = task
-        newItem.done = false
-        newItem.isArchived = false
-        do{
-            try context.save()
-            getAllItems()
-            tableView.reloadData()
-        }catch{
-          print("error saving")
-        }
-        print(newItem.done)
-    }
-    
-    func deleteItem(item:NewTask){
-        context.delete(item)
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-    }
-    
-    func updateItem(item:NewTask, newTaskName:String){
-        item.task = newTaskName
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-    }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = models[indexPath.row]
+        let item = dataProvider.models[indexPath.row]
         
         if item.isArchived{
             return 0
@@ -106,9 +60,9 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             let deleteAction = UIAlertAction(title: "Yes", style: .default){
                 [unowned self] action in
                 
-                let commit = self.models[indexPath.row]
+                let commit = dataProvider.models[indexPath.row]
                 commit.managedObjectContext?.delete(commit)
-                self.models.remove(at: indexPath.row)
+                dataProvider.models.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
                 do{
                     try commit.managedObjectContext?.save()
@@ -125,9 +79,9 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             self.present(deleteAlert, animated: true)
         }
         
-        let archive = UIContextualAction(style: .normal, title: "Archive"){ (action, view, completionHandler) in
+        let archive = UIContextualAction(style: .normal, title: "Archive"){ [self] (action, view, completionHandler) in
             
-            let commit = self.models[indexPath.row]
+            let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
             tableView.reloadData()
@@ -154,12 +108,12 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        models.count
+        dataProvider.models.count
     }
     
     
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
-        let model = models[indexPath.row]
+        let model = dataProvider.models[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        
@@ -170,14 +124,18 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
-       
+       let vc = UIHostingController(rootView: addNewTask())
+        vc.modalPresentationStyle = .fullScreen
+        
+        present(vc, animated: true)
+        
     }
     
     func toggleDone(for index:Int){
         
-        models[index].done.toggle()
+        dataProvider.models[index].done.toggle()
         do{
-            try context.save()
+            try dataProvider.context.save()
         }catch{
             
         }
@@ -186,7 +144,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? EditVC{
             destination.indexPath = tableView.indexPathForSelectedRow?.row
-            
+    
         }
     }
     

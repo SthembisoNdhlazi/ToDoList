@@ -1,23 +1,17 @@
 //
-//  NewTaskViewController.swift
+//  DataProvider.swift
 //  NewtodoList
 //
-//  Created by Sthembiso Ndhlazi on 2022/08/31.
+//  Created by Sthembiso Ndhlazi on 2022/09/01.
 //
 
+import Foundation
 import UIKit
 
-class NewTaskViewController: UIViewController {
-
+class DataProvider{
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     
-    private var models = [NewTask]()
-    
-    @IBOutlet weak var text: UITextField!
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        text.placeholder = "Enter a new task"
-    }
+    var models = [NewTask]()
     
     func getAllItems(){
       
@@ -25,6 +19,7 @@ class NewTaskViewController: UIViewController {
         do{
             models = try context.fetch(NewTask.fetchRequest())
             
+           
             
         }catch{
             print("Error fetching data")
@@ -39,20 +34,31 @@ class NewTaskViewController: UIViewController {
         do{
             try context.save()
             getAllItems()
-          
+            
         }catch{
           print("error saving")
         }
         print(newItem.done)
     }
     
-    
-    @IBAction func saveTapped(_ sender: Any) {
+    func deleteItem(item:NewTask){
+        context.delete(item)
         
-        createItem(task: text.text!)
-        self.navigationController?.popToRootViewController( animated: true)
-        
+        do{
+            try context.save()
+        }catch{
+            
+        }
     }
     
-
+    func updateItem(item:NewTask, newTaskName:String, description:String){
+        item.task = newTaskName
+        item.taskDescription = description
+        do{
+            try context.save()
+        }catch{
+            
+        }
+    }
+    
 }

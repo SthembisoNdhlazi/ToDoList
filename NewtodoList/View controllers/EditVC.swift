@@ -9,47 +9,43 @@ import UIKit
 
 class EditVC: UIViewController {
 
+    @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var text: UITextField!
-    let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+   let dataProvider = DataProvider()
     
-    private var models = [NewTask]()
     var indexPath:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-       getAllItems()
-        text.text = models[indexPath!].task
+        dataProvider.getAllItems()
+        text.text = dataProvider.models[indexPath!].task
+        if ((dataProvider.models[indexPath!].taskDescription?.isEmpty) != nil){
+            descriptionView.text = dataProvider.models[indexPath!].taskDescription
+        }else{
+            descriptionView.text = "this task doesn't have a description. \nAdd one"
+        }
+        
+        descriptionView.layer.borderWidth = 0.5
+        descriptionView.layer.cornerRadius = descriptionView.frame.size.height / 10
+        text.layer.borderWidth = 0.5
+        text.layer.cornerRadius = text.frame.size.height/20
+        
+        
     }
     
+
+    
     @IBAction func saveTapped(_ sender: Any) {
-        let item = models[indexPath!]
+        let item = dataProvider.models[indexPath!]
         let taskToUpdate = text.text
+        let descriptionUpdate = descriptionView.text
         
-        updateItem(item: item, newTaskName: taskToUpdate!)
+        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!)
         
      
         self.navigationController?.popToRootViewController( animated: true)
         
     }
-    func getAllItems(){
-
-        do{
-            models = try context.fetch(NewTask.fetchRequest())
-            
-        }catch{
-            print("Error fetching data")
-        }
-    }
-    
-    func updateItem(item: NewTask, newTaskName: String){
-        item.task = newTaskName
-        
-        do{
-            try context.save()
-        }catch{
-            
-        }
-    }
-
+ 
 }
