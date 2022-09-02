@@ -95,6 +95,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         archive.backgroundColor = .blue
         delete.image = UIImage(systemName: "trash")
         delete.backgroundColor = .red
+       
         //swipe action to return
         let swipe = UISwipeActionsConfiguration(actions: [delete,archive])
         return swipe
