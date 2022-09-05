@@ -13,6 +13,7 @@ struct addNewTask: View {
     
     @State var newTaskTitle:String = ""
     @State var description:String = ""
+    @State var birthDate = Date()
     
     var body: some View {
         VStack {
@@ -61,6 +62,13 @@ struct addNewTask: View {
             .frame(maxWidth:.infinity, alignment: .leading)
             Spacer()
                 .frame(height:25)
+            VStack {
+                DatePicker(selection: $birthDate, in: Date()..., displayedComponents: [.date, .hourAndMinute]) {
+                           Text("Select a date")
+                       }
+    
+                      
+                   }
             Button{
                 let newItem = NewTask(context: context)
                 newItem.task = newTaskTitle
@@ -68,6 +76,7 @@ struct addNewTask: View {
                 
                 newItem.done = false
                 newItem.isArchived = false
+                newItem.date = birthDate
                 do{
                     try context.save()
                    

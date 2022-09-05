@@ -42,16 +42,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
 
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = dataProvider.models[indexPath.row]
-        
-        if item.isArchived{
-            return 0
-        } else {
-            return 100
-        }
-        
-    }
+    
    
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .normal, title: "Delete"){ (action, view, completionHandler) in
@@ -64,6 +55,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                 commit.managedObjectContext?.delete(commit)
                 dataProvider.models.remove(at: indexPath.row)
                 tableView.deleteRows(at: [indexPath], with: .fade)
+                dataProvider.getAllItems()
+                tableView.reloadData()
                 do{
                     try commit.managedObjectContext?.save()
                 } catch {
@@ -84,6 +77,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
+            dataProvider.getAllItems()
             tableView.reloadData()
             do{
                 try commit.managedObjectContext?.save()
@@ -92,10 +86,11 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             }
         }
         
-        archive.backgroundColor = .blue
+        archive.backgroundColor = .black
         delete.image = UIImage(systemName: "trash")
-        delete.backgroundColor = .red
-       
+        delete.backgroundColor = .white
+        delete.backgroundColor = .gray
+    
         //swipe action to return
         let swipe = UISwipeActionsConfiguration(actions: [delete,archive])
         return swipe
@@ -104,6 +99,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
       
     performSegue(withIdentifier: "viewTask", sender: indexPath)
+        print(dataProvider.models[indexPath.row].date)
     }
     
    
@@ -157,6 +153,7 @@ extension ViewController: isDone{
         if let indexPath = tableView.indexPath(for: cell){
             toggleDone(for: indexPath.row)
             tableView.reloadData()
+            dataProvider.getAllItems()
         }
     }
 }

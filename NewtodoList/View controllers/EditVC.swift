@@ -9,6 +9,7 @@ import UIKit
 
 class EditVC: UIViewController {
 
+    @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var descriptionView: UITextView!
     @IBOutlet weak var text: UITextField!
    let dataProvider = DataProvider()
@@ -31,7 +32,7 @@ class EditVC: UIViewController {
         text.layer.borderWidth = 0.5
         text.layer.cornerRadius = text.frame.size.height/20
         
-        
+        datePicker.date = dataProvider.models[indexPath!].date ?? Date()
     }
     
 
@@ -41,11 +42,15 @@ class EditVC: UIViewController {
         let taskToUpdate = text.text
         let descriptionUpdate = descriptionView.text
         
-        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!)
+        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date)
         
      
         self.navigationController?.popToRootViewController( animated: true)
         
     }
- 
+    
+    @IBAction func dateChanged(_ sender: Any) {
+        
+    }
+    
 }

@@ -17,7 +17,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        dataProvider.getAllItems()
+        dataProvider.getArchivedItems()
        title = "Archived tasks📨"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
@@ -60,6 +60,8 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
             let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
+        
+            dataProvider.getArchivedItems()
             tableView.reloadData()
             do{
                 try commit.managedObjectContext?.save()
@@ -68,24 +70,16 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
         
-        archive.backgroundColor = .blue
+        archive.backgroundColor = .black
         delete.image = UIImage(systemName: "trash")
-        delete.backgroundColor = .red
+        delete.backgroundColor = .white
+        delete.backgroundColor = .gray
         //swipe action to return
         let swipe = UISwipeActionsConfiguration(actions: [delete,archive])
         return swipe
         
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let item = dataProvider.models[indexPath.row]
-        
-        if item.isArchived{
-            return 100
-        } else {
-            return 0
-        }
-        
-    }
+   
 
 }
