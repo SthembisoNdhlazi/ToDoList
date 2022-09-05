@@ -37,7 +37,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
         let model = dataProvider.models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        
-        cell?.setUpCell(task: model.task!,isDone: model.done)
+        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done)
         
         return cell!
     }
@@ -55,7 +55,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
                 print("Couldn't save")
             }
         }
-        let archive = UIContextualAction(style: .normal, title: "UnArchive"){ [self] (action, view, completionHandler) in
+        let archive = UIContextualAction(style: .normal, title: "Unarchive"){ [self] (action, view, completionHandler) in
             
             let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
@@ -71,6 +71,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         archive.backgroundColor = .black
+        archive.image = UIImage(systemName: "archivebox")
         delete.image = UIImage(systemName: "trash")
         delete.backgroundColor = .white
         delete.backgroundColor = .gray

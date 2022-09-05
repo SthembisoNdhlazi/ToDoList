@@ -38,23 +38,38 @@
                                                             </connections>
                                                         </button>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uPu-JT-fa1">
-                                                            <rect key="frame" x="5" y="5" width="211" height="90"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" constant="211" id="vj4-eW-Dcr"/>
-                                                            </constraints>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                            <rect key="frame" x="19.999999999999996" y="5" width="42.666666666666657" height="85"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                                             <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Description" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H2s-Is-JAF">
+                                                            <rect key="frame" x="20" y="45" width="79" height="45"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <color key="textColor" systemColor="secondaryLabelColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJX-6H-Jcv">
+                                                            <rect key="frame" x="286" y="60" width="29" height="35"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                            <color key="textColor" systemColor="placeholderTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
-                                                        <constraint firstItem="uPu-JT-fa1" firstAttribute="leading" secondItem="MY4-aO-VOJ" secondAttribute="leading" constant="5" id="3Ui-Ot-PN6"/>
-                                                        <constraint firstAttribute="bottom" secondItem="uPu-JT-fa1" secondAttribute="bottom" constant="5" id="Bi7-Zs-FqE"/>
+                                                        <constraint firstItem="H2s-Is-JAF" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="45" id="1sv-sb-rrJ"/>
+                                                        <constraint firstItem="H2s-Is-JAF" firstAttribute="leading" secondItem="MY4-aO-VOJ" secondAttribute="leading" constant="20" id="206-Im-uJl"/>
+                                                        <constraint firstItem="uPu-JT-fa1" firstAttribute="leading" secondItem="MY4-aO-VOJ" secondAttribute="leading" constant="20" id="3Ui-Ot-PN6"/>
+                                                        <constraint firstAttribute="bottom" secondItem="uPu-JT-fa1" secondAttribute="bottom" constant="10" id="Bi7-Zs-FqE"/>
                                                         <constraint firstItem="uPu-JT-fa1" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="5" id="Em7-gc-8al"/>
+                                                        <constraint firstAttribute="bottom" secondItem="H2s-Is-JAF" secondAttribute="bottom" constant="10" id="Ftz-Sc-YKr"/>
+                                                        <constraint firstAttribute="bottom" secondItem="EJX-6H-Jcv" secondAttribute="bottom" constant="5" id="P4a-Kq-1Uc"/>
                                                         <constraint firstItem="aUa-o3-jRh" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="5" id="afC-ds-H7Z"/>
                                                         <constraint firstAttribute="trailing" secondItem="aUa-o3-jRh" secondAttribute="trailing" id="daL-vU-l6o"/>
+                                                        <constraint firstItem="EJX-6H-Jcv" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="60" id="qKi-pU-N8y"/>
                                                         <constraint firstAttribute="bottom" secondItem="aUa-o3-jRh" secondAttribute="bottom" constant="5" id="sAL-ZS-tta"/>
+                                                        <constraint firstItem="aUa-o3-jRh" firstAttribute="leading" secondItem="EJX-6H-Jcv" secondAttribute="trailing" constant="30" id="wIN-8E-HX0"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -69,6 +84,8 @@
                                             <outlet property="cellLabel" destination="uPu-JT-fa1" id="mI3-sS-F4V"/>
                                             <outlet property="cellView" destination="MY4-aO-VOJ" id="5PP-8P-YY1"/>
                                             <outlet property="checkButton" destination="aUa-o3-jRh" id="37N-wi-xw1"/>
+                                            <outlet property="dateLabel" destination="EJX-6H-Jcv" id="Y4e-LQ-ysh"/>
+                                            <outlet property="descriptionLabel" destination="H2s-Is-JAF" id="eHe-eW-xYb"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -325,6 +342,12 @@
         <image name="note.text" catalog="system" width="128" height="106"/>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="placeholderTextColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.29999999999999999" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="secondaryLabelColor">
+            <color red="0.23529411764705882" green="0.23529411764705882" blue="0.2627450980392157" alpha="0.59999999999999998" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

@@ -16,6 +16,9 @@ class CustomTableViewCell: UITableViewCell {
 
     @IBOutlet weak var cellLabel: UILabel!
     
+    @IBOutlet weak var dateLabel: UILabel!
+    
+    @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var checkButton: UIButton!
     
     @IBOutlet weak var cellView: UIView!
@@ -37,11 +40,13 @@ class CustomTableViewCell: UITableViewCell {
     }
    
     
-    func setUpCell(task: String, isDone: Bool){
+    func setUpCell(task: String, taskDescription: String,specifiedDate: String, isDone: Bool){
         cellLabel.text = task
+        descriptionLabel.text = taskDescription
+        dateLabel.text = specifiedDate
         
         if isDone{
-            checkButton.setImage(UIImage(systemName: "checkmark.circle")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
+            checkButton.setImage(UIImage(systemName: "checkmark.circle.fill")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
         } else{
             checkButton.setImage(UIImage(systemName: "circle")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
         }
