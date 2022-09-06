@@ -12,6 +12,7 @@ class ProgressBarVC: UIView{
     @IBInspectable public  var endGradientColor: UIColor = UIColor.systemTeal
     @IBInspectable public  var textColor: UIColor = UIColor.black
     @IBInspectable public  var backgroundCircleColor: UIColor = UIColor.lightGray
+   
     
     var backgroundLayer : CAShapeLayer!
     var foregroundLayer : CAShapeLayer!
@@ -87,7 +88,8 @@ class ProgressBarVC: UIView{
         let offset = min(width, height) * 0.1
         
         let layer = CATextLayer()
-        layer.string = "\(Int(progress * 100))"
+        layer.string = "\(Int(progress * 100 ))"
+        //(NewTask.task?.count)
         layer.backgroundColor = UIColor.clear.cgColor
         layer.foregroundColor = textColor
         layer.fontSize = fontSize

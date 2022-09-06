@@ -10,29 +10,32 @@ import UIKit
 import CoreData
 import SwiftUI
 
+
+
 class dashboardVC :  UIViewController{
     
-    //let dataProvider = DataProvider()
+    let dataProvider = DataProvider()
     
     @IBOutlet weak var progressBar: ProgressBarVC!
     
-   // var countFired: CGFloat = 0
+   var countFired: CGFloat = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
-       // dataProvider.getAllItems()
+        dataProvider.getAllItems()
         
-//       for item in NewTask{
-//        if done == true{
-//            self.countFired += 1
-//            DispatchQueue.main.async {
-//                self.progressBar.progress = min(0.03 * self.countFired, 1)
-//            }
-//        }else{
-//            self.countFired -= 1
-//        }
-//
-//    }
+       for item in self.dataProvider.models{
+           if item.done == true{
+            self.countFired += 1
+            DispatchQueue.main.async {
+                self.progressBar.progress = min(0.03 * self.countFired, 1)
+                self.dataProvider.getAllItems()
+                
+            }
+               
+        }
+      
+    }
     }
     
 }

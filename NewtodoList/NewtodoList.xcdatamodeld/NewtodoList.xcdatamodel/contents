@@ -4,10 +4,11 @@
         <attribute name="date" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
         <attribute name="done" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="isArchived" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="isOverdue" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
         <attribute name="task" optional="YES" attributeType="String"/>
         <attribute name="taskDescription" optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="NewTask" positionX="-63" positionY="-18" width="128" height="104"/>
+        <element name="NewTask" positionX="-63" positionY="-18" width="128" height="119"/>
     </elements>
 </model>
