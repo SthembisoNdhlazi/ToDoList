@@ -22,6 +22,7 @@ extension NewTask {
     @NSManaged public var isArchived:Bool
     @NSManaged public var taskDescription:String?
     @NSManaged public var date:Date?
+    @NSManaged public var category:String?
 }
 
 extension NewTask : Identifiable {

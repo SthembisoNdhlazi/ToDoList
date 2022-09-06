@@ -14,7 +14,8 @@ struct addNewTask: View {
     @State var newTaskTitle:String = ""
     @State var description:String = ""
     @State var birthDate = Date()
-    
+    var categories = ["Work","School", "Urgent", "Home"]
+    @State private var selectedCategory = "Work"
     var body: some View {
         VStack {
             Button{
@@ -69,6 +70,17 @@ struct addNewTask: View {
     
                       
                    }
+            VStack {
+                HStack{
+                    Text("Select a category")
+                    Spacer()
+                       Picker("Please choose a category", selection: $selectedCategory) {
+                           ForEach(categories, id: \.self) {
+                               Text($0)
+                           }
+                       }
+                }
+                   }
             Button{
                 let newItem = NewTask(context: context)
                 newItem.task = newTaskTitle
@@ -77,6 +89,7 @@ struct addNewTask: View {
                 newItem.done = false
                 newItem.isArchived = false
                 newItem.date = birthDate
+                newItem.category = selectedCategory
                 do{
                     try context.save()
                    
@@ -98,7 +111,7 @@ struct addNewTask: View {
             }
            
             Spacer()
-                .frame(height:300)
+                .frame(height:150)
         }
         .padding(.horizontal, 25)
         

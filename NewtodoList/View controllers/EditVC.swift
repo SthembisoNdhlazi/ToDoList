@@ -7,11 +7,16 @@
 
 import UIKit
 
-class EditVC: UIViewController {
+class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var descriptionView: UITextView!
+    
+    @IBOutlet weak var picker: UIPickerView!
+    
     @IBOutlet weak var text: UITextField!
+    var pickerData = ["Work","School", "Urgent", "Home"]
+    var selectedCategory: String?
    let dataProvider = DataProvider()
     
     var indexPath:Int?
@@ -33,6 +38,11 @@ class EditVC: UIViewController {
         text.layer.cornerRadius = text.frame.size.height/20
         
         datePicker.date = dataProvider.models[indexPath!].date ?? Date()
+        
+        
+        self.picker.delegate = self
+        self.picker.dataSource = self
+        
     }
     
 
@@ -53,4 +63,18 @@ class EditVC: UIViewController {
         
     }
     
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return pickerData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return pickerData[row]
+    }
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        selectedCategory = pickerData[row]
+    }
 }
