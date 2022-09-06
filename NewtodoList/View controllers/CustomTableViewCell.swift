@@ -42,8 +42,8 @@ class CustomTableViewCell: UITableViewCell {
     
     func setUpCell(task: String, taskDescription: String,specifiedDate: String, isDone: Bool){
         cellLabel.text = task
-        descriptionLabel.text = taskDescription
-        dateLabel.text = specifiedDate
+        //descriptionLabel.text = taskDescription
+        //dateLabel.text = specifiedDate
         
         if isDone{
             checkButton.setImage(UIImage(systemName: "checkmark.circle.fill")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)

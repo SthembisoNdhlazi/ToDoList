@@ -24,6 +24,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         dataProvider.getAllItems()
         
        title = "To do list"
+    
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
@@ -87,6 +88,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         }
         
         archive.backgroundColor = .black
+        archive.image = UIImage(systemName: "archivebox")
         delete.image = UIImage(systemName: "trash")
         delete.backgroundColor = .white
         delete.backgroundColor = .gray
@@ -97,9 +99,11 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-      
+       
     performSegue(withIdentifier: "viewTask", sender: indexPath)
         print(dataProvider.models[indexPath.row].date)
+        
+     
     }
     
    
