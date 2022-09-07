@@ -14,6 +14,11 @@
 		B87930E728BE6840004BD0F8 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87930E628BE6840004BD0F8 /* EditVC.swift */; };
 		B879317228C07725004BD0F8 /* addNewTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = B879317128C07725004BD0F8 /* addNewTask.swift */; };
 		B87B034B28C129B1003BE8D4 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87B034A28C129B1003BE8D4 /* DataProvider.swift */; };
+		B87FD0D228C890C2009B4A0A /* UrgentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FD0D128C890C2009B4A0A /* UrgentViewController.swift */; };
+		B87FD0D428C896AE009B4A0A /* WorkViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FD0D328C896AE009B4A0A /* WorkViewController.swift */; };
+		B87FD0D628C89716009B4A0A /* PersonalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FD0D528C89716009B4A0A /* PersonalViewController.swift */; };
+		B87FD0D828C8972A009B4A0A /* SchoolViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FD0D728C8972A009B4A0A /* SchoolViewController.swift */; };
+		B87FD0DA28C8973E009B4A0A /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87FD0D928C8973E009B4A0A /* HomeViewController.swift */; };
 		B8AB785D28AFFC8B00DDFE8C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB785C28AFFC8B00DDFE8C /* AppDelegate.swift */; };
 		B8AB785F28AFFC8B00DDFE8C /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB785E28AFFC8B00DDFE8C /* SceneDelegate.swift */; };
 		B8AB786128AFFC8B00DDFE8C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8AB786028AFFC8B00DDFE8C /* ViewController.swift */; };
@@ -34,6 +39,11 @@
 		B87930E628BE6840004BD0F8 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
 		B879317128C07725004BD0F8 /* addNewTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addNewTask.swift; sourceTree = "<group>"; };
 		B87B034A28C129B1003BE8D4 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		B87FD0D128C890C2009B4A0A /* UrgentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UrgentViewController.swift; sourceTree = "<group>"; };
+		B87FD0D328C896AE009B4A0A /* WorkViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkViewController.swift; sourceTree = "<group>"; };
+		B87FD0D528C89716009B4A0A /* PersonalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalViewController.swift; sourceTree = "<group>"; };
+		B87FD0D728C8972A009B4A0A /* SchoolViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SchoolViewController.swift; sourceTree = "<group>"; };
+		B87FD0D928C8973E009B4A0A /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		B8AB785928AFFC8B00DDFE8C /* NewtodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NewtodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B8AB785C28AFFC8B00DDFE8C /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		B8AB785E28AFFC8B00DDFE8C /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -87,8 +97,21 @@
 				B8AB787328B3F8C900DDFE8C /* CustomTableViewCell.swift */,
 				B879317128C07725004BD0F8 /* addNewTask.swift */,
 				AD7BB9C528C65B8C00E45619 /* ViewTaskDetail.swift */,
+				B87FD0DB28C89CB8009B4A0A /* categories view controllers */,
 			);
 			path = "View controllers";
+			sourceTree = "<group>";
+		};
+		B87FD0DB28C89CB8009B4A0A /* categories view controllers */ = {
+			isa = PBXGroup;
+			children = (
+				B87FD0D128C890C2009B4A0A /* UrgentViewController.swift */,
+				B87FD0D328C896AE009B4A0A /* WorkViewController.swift */,
+				B87FD0D528C89716009B4A0A /* PersonalViewController.swift */,
+				B87FD0D728C8972A009B4A0A /* SchoolViewController.swift */,
+				B87FD0D928C8973E009B4A0A /* HomeViewController.swift */,
+			);
+			path = "categories view controllers";
 			sourceTree = "<group>";
 		};
 		B8AB785028AFFC8B00DDFE8C = {
@@ -197,16 +220,21 @@
 			files = (
 				B8AB786728AFFC8B00DDFE8C /* NewtodoList.xcdatamodeld in Sources */,
 				B8AB787428B3F8CA00DDFE8C /* CustomTableViewCell.swift in Sources */,
+				B87FD0DA28C8973E009B4A0A /* HomeViewController.swift in Sources */,
+				B87FD0D628C89716009B4A0A /* PersonalViewController.swift in Sources */,
 				B8AB786128AFFC8B00DDFE8C /* ViewController.swift in Sources */,
 				B8AB787C28B4F21000DDFE8C /* NewTask+CoreDataClass.swift in Sources */,
 				B8AB787D28B4F21000DDFE8C /* NewTask+CoreDataProperties.swift in Sources */,
+				B87FD0D428C896AE009B4A0A /* WorkViewController.swift in Sources */,
 				B8AB785D28AFFC8B00DDFE8C /* AppDelegate.swift in Sources */,
+				B87FD0D828C8972A009B4A0A /* SchoolViewController.swift in Sources */,
 				B87B034B28C129B1003BE8D4 /* DataProvider.swift in Sources */,
 				B8AB785F28AFFC8B00DDFE8C /* SceneDelegate.swift in Sources */,
 				ADF6816928C7524C00B4AD88 /* ProgressBarVC.swift in Sources */,
 				AD7BB9C628C65B8C00E45619 /* ViewTaskDetail.swift in Sources */,
 				B878865C28B6247B0057D719 /* ArchiveViewController.swift in Sources */,
 				AD772BD628C769D700F87651 /* dashboardVC.swift in Sources */,
+				B87FD0D228C890C2009B4A0A /* UrgentViewController.swift in Sources */,
 				B879317228C07725004BD0F8 /* addNewTask.swift in Sources */,
 				B87930E728BE6840004BD0F8 /* EditVC.swift in Sources */,
 			);
