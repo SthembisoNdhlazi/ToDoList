@@ -19,13 +19,19 @@ class ProgressBarVC: UIView{
     var textLayer : CATextLayer!
     var gradientLayer: CAGradientLayer!
     
-    var progress : CGFloat = 0 {
-        didSet{
-            didUpdateProgress()
-        }
-    }
+    var doneprogress : CGFloat = 0.0
+    var overdueprogress : CGFloat = 0.0
+    
+    var okayPatsVar : CGFloat = 0.0
+   var dashboardClass = dashboardVC()
+    
+
+    
     
     override func draw(_ rect: CGRect) {
+        
+        
+        
         //drawing code
         guard layer.sublayers == nil else{return} // stops it from duplicating layers
         let width = rect.width
@@ -88,7 +94,7 @@ class ProgressBarVC: UIView{
         let offset = min(width, height) * 0.1
         
         let layer = CATextLayer()
-        layer.string = "\(Int(progress * 100 ))"
+        layer.string = "\((dashboardClass.donevalue/dashboardClass.donetotal) * 100 )"
         //(NewTask.task?.count)
         layer.backgroundColor = UIColor.clear.cgColor
         layer.foregroundColor = textColor
@@ -100,8 +106,32 @@ class ProgressBarVC: UIView{
     }
     
     func didUpdateProgress(){
-        textLayer?.string = "\(Int(progress * 100))"
-        foregroundLayer?.strokeEnd = progress
+       // okayPatsVar = (dashboardClass.donevalue/dashboardClass.donetotal)
+        
+      //  textLayer?.string = "\(okayPatsVar * 100)"
+     //   foregroundLayer?.strokeEnd = progressBarValue(value: dashboardClass.donevalue, total: dashboardClass.donetotal)
+       
+       // foregroundLayer?.strokeEnd = 0
+       
+    }
+ 
+
+
+
+
+    func progressBarValue(value: CGFloat, total: CGFloat)->CGFloat{
+        let percentage = value/total
+        print(percentage)
+        print(value)
+        print(total)
+      
+        if  percentage.isNaN || percentage.isInfinite {
+            return 0.0
+            
+        }else{
+        return percentage
+        }
+        
         
     }
 }

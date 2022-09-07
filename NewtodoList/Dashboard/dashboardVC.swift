@@ -28,11 +28,42 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var progressBar: ProgressBarVC!
     
    var countFired: CGFloat = 0
+    var donetotal: CGFloat = 0.0
+    var donevalue: CGFloat = 0.0
+    //---
+    var overduetotal: CGFloat = 0.0
+    var overduevalue: CGFloat = 0.0
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationItem.title = "Your Title"
+        
+        //done
+        donevalue = CGFloat(dataProvider.models.filter{
+            $0.done
+        }.count)
+        
+        donetotal = CGFloat(dataProvider.models.count)
+     
+        overduevalue = CGFloat(dataProvider.models.filter{
+            $0.isOverdue
+        }.count)
+        
+        overduetotal = CGFloat(dataProvider.models.count)
+        
+       // progressBar.didUpdateProgress()
+       print("wubba lubba dub dub \(progressBar.progressBarValue(value: donevalue, total: donetotal))")
+    }
+    
+//    override func viewDidAppear(_ animated: Bool) {
+//        progressBar.didUpdateProgress()
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dashboardScrollView.contentSize = CGSize(width: 700, height: 1000)
+        
+        dashboardScrollView.contentSize = CGSize(width: 380, height: 1000)
         dataProvider.getAllItems()
+        
         
         dashboardScrollView.delegate = self
         
@@ -40,15 +71,17 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
            if item.done == true{
             self.countFired += 1
             DispatchQueue.main.async {
-                self.progressBar.progress = min(0 * self.countFired, 1)
+                self.progressBar.doneprogress = min(0 * self.countFired, 1)
                 self.dataProvider.getAllItems()
                 
             }
                
         }
+           
       
     }
-     
+        
+        
         //Customising the UIView SHortcuts
         
        // archive view
