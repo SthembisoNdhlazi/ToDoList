@@ -96,6 +96,7 @@ struct addNewTask: View {
                 }catch{
                   print("error saving")
                 }
+                print("This is the birthdate we looking for : \(birthDate)")
                 dismiss()
             }label:{
                 Text("Save")

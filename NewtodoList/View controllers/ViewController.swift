@@ -118,7 +118,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        
-        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "" ,specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short), isDone: model.done, model: model)
+        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "" ,specifiedDate: DateFormatter.localizedString(from: model.date!, dateStyle: .short, timeStyle: .short), isDone: model.done, model: model)
         
         
         cell?.isDoneDelegate = self
