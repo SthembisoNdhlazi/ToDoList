@@ -22,6 +22,10 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         tableView.delegate = self
         tableView.dataSource = self
     }
+    override func viewWillAppear(_ animated: Bool) {
+        tableView.reloadData()
+        dataProvider.getHomeItems()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
