@@ -25,9 +25,12 @@ class UrgentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+       
         dataProvider.getUrgentItems()
+        tableView.reloadData()
     }
+    
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         dataProvider.models.count

@@ -24,8 +24,9 @@ class PersonalViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+       
         dataProvider.getPersonalItems()
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -101,7 +101,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
        
     performSegue(withIdentifier: "viewTask", sender: indexPath)
-        print(dataProvider.models[indexPath.row].date)
+        
         
      
     }

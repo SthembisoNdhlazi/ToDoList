@@ -23,8 +23,9 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
     }
     override func viewWillAppear(_ animated: Bool) {
+        
+        dataProvider.getUrgentItems()
         tableView.reloadData()
-        dataProvider.getSchoolItems()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

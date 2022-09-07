@@ -24,8 +24,9 @@ class WorkViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        tableView.reloadData()
+        
         dataProvider.getWorkItems()
+        tableView.reloadData()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
