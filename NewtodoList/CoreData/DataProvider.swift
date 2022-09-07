@@ -29,6 +29,57 @@ class DataProvider{
             print("Error fetching data")
         }
     }
+    
+    func getUrgentItems(){
+        let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "category == 'Urgent'")
+        
+        
+        
+        do{
+            models = try context.fetch(request)
+            
+           
+            
+        }catch{
+            print("Error fetching data")
+        }
+    }
+    
+    func getPersonalItems(){
+        let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "category == 'Personal'")
+        
+        
+        
+        do{
+            models = try context.fetch(request)
+            
+           
+            
+        }catch{
+            print("Error fetching data")
+        }
+    }
+    func getWorkItems(){
+        let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "category == 'Work'")
+        
+        
+        
+        do{
+            models = try context.fetch(request)
+            
+           
+            
+        }catch{
+            print("Error fetching data")
+        }
+    }
+    
     func getArchivedItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
@@ -70,14 +121,48 @@ class DataProvider{
         }
     }
     
-    func updateItem(item:NewTask, newTaskName:String, description:String, date:Date?){
+    func updateItem(item:NewTask, newTaskName:String, description:String, date:Date?, category:String?){
         item.task = newTaskName
         item.taskDescription = description
         item.date = date
+        item.category = category
         do{
             try context.save()
         }catch{
             
+        }
+    }
+    
+    func getSchoolItems(){
+        let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "category == 'School'")
+        
+        
+        
+        do{
+            models = try context.fetch(request)
+            
+           
+            
+        }catch{
+            print("Error fetching data")
+        }
+    }
+    func getHomeItems(){
+        let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
+        
+        request.predicate = NSPredicate(format: "category == 'Home'")
+        
+        
+        
+        do{
+            models = try context.fetch(request)
+            
+           
+            
+        }catch{
+            print("Error fetching data")
         }
     }
     

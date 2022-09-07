@@ -14,7 +14,7 @@ struct addNewTask: View {
     @State var newTaskTitle:String = ""
     @State var description:String = ""
     @State var birthDate = Date()
-    var categories = ["Work","School", "Urgent", "Home"]
+    var categories = ["Work","School", "Urgent", "Home","Personal"]
     @State private var selectedCategory = "Work"
     var body: some View {
         VStack {

@@ -15,7 +15,7 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     @IBOutlet weak var picker: UIPickerView!
     
     @IBOutlet weak var text: UITextField!
-    var pickerData = ["Work","School", "Urgent", "Home"]
+    var pickerData = ["Work","School", "Urgent", "Home","Personal"]
     var selectedCategory: String?
    let dataProvider = DataProvider()
     
@@ -52,7 +52,7 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
         let taskToUpdate = text.text
         let descriptionUpdate = descriptionView.text
         
-        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date)
+        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date, category: selectedCategory)
         
      
         self.navigationController?.popToRootViewController( animated: true)
