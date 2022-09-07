@@ -23,12 +23,17 @@
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <items>
                                         <navigationItem id="ESe-Q2-3XZ">
-                                            <barButtonItem key="leftBarButtonItem" image="archivebox" catalog="system" id="Noj-n0-Ma4">
-                                                <color key="tintColor" systemColor="labelColor"/>
-                                                <connections>
-                                                    <segue destination="6zr-IX-gZX" kind="show" id="DxY-Ia-L6a"/>
-                                                </connections>
-                                            </barButtonItem>
+                                            <leftBarButtonItems>
+                                                <barButtonItem image="archivebox" catalog="system" id="Noj-n0-Ma4">
+                                                    <color key="tintColor" systemColor="labelColor"/>
+                                                    <connections>
+                                                        <segue destination="6zr-IX-gZX" kind="show" id="DxY-Ia-L6a"/>
+                                                    </connections>
+                                                </barButtonItem>
+                                                <barButtonItem title="Item" image="line.3.horizontal.decrease" catalog="system" id="iBc-iP-S2Z">
+                                                    <color key="tintColor" systemColor="labelColor"/>
+                                                </barButtonItem>
+                                            </leftBarButtonItems>
                                             <barButtonItem key="rightBarButtonItem" title="Item" image="plus" catalog="system" id="KiK-ws-pOY">
                                                 <color key="tintColor" systemColor="labelColor"/>
                                                 <connections>
@@ -1375,6 +1380,7 @@
         <image name="circle" catalog="system" width="128" height="121"/>
         <image name="exclamationmark.triangle.fill" catalog="system" width="128" height="112"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
+        <image name="line.3.horizontal.decrease" catalog="system" width="128" height="73"/>
         <image name="list.bullet" catalog="system" width="128" height="88"/>
         <image name="list.bullet.circle" catalog="system" width="128" height="121"/>
         <image name="note.text" catalog="system" width="128" height="106"/>
