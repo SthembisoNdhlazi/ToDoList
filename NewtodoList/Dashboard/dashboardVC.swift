@@ -12,11 +12,16 @@ import SwiftUI
 
 
 
-class dashboardVC :  UIViewController{
+class dashboardVC :  UIViewController, UIScrollViewDelegate {
     
     let dataProvider = DataProvider()
    
+    @IBOutlet weak var schoolUIView: UIView!
+    @IBOutlet weak var homeUIView: UIView!
+    @IBOutlet weak var workUIView: UIView!
+    @IBOutlet weak var dashboardScrollView: UIScrollView!
     
+    @IBOutlet weak var personalUIView: UIView!
     @IBOutlet weak var overDueTasks: UIView!
     @IBOutlet weak var allTaskView: UIView!
     @IBOutlet weak var archiveUIView: UIView!
@@ -26,7 +31,10 @@ class dashboardVC :  UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dashboardScrollView.contentSize = CGSize(width: 320, height: 1000)
         dataProvider.getAllItems()
+        
+        dashboardScrollView.delegate = self
         
        for item in self.dataProvider.models{
            if item.done == true{
@@ -57,13 +65,42 @@ class dashboardVC :  UIViewController{
         allTaskView.layer.shadowOpacity = 0.2
         allTaskView.layer.cornerRadius = 15
         
-        //overdue tasks
+        //overdue tasks AKA urgent
         
         overDueTasks.layer.shadowOffset = CGSize(width: 10, height: 10)
         overDueTasks.layer.shadowRadius = 5
         overDueTasks.layer.shadowOpacity = 0.2
         overDueTasks.layer.cornerRadius = 15
         
+        // work uiview
+        workUIView.layer.shadowOffset = CGSize(width: 10, height: 10)
+ 
+        workUIView.layer.shadowRadius = 5
+        workUIView.layer.shadowOpacity = 0.2
+        workUIView.layer.cornerRadius = 15
+        
+        //personal UIView
+        personalUIView.layer.shadowOffset = CGSize(width: 10, height: 10)
+ 
+        personalUIView.layer.shadowRadius = 5
+        personalUIView.layer.shadowOpacity = 0.2
+        personalUIView.layer.cornerRadius = 15
+        
+        //home UIview
+        
+        homeUIView.layer.shadowOffset = CGSize(width: 10, height: 10)
+ 
+        homeUIView.layer.shadowRadius = 5
+        
+       homeUIView.layer.shadowOpacity = 0.2
+        homeUIView.layer.cornerRadius = 15
+        
+        //school
+        schoolUIView.layer.shadowOffset = CGSize(width: 10, height: 10)
+        
+        schoolUIView.layer.shadowRadius = 5
+       schoolUIView.layer.shadowOpacity = 0.2
+       schoolUIView.layer.cornerRadius = 15
     }
     
 }
