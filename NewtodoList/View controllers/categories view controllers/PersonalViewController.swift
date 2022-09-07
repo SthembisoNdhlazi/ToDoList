@@ -33,7 +33,7 @@ class PersonalViewController: UIViewController, UITableViewDelegate, UITableView
         let model = dataProvider.models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
     
-        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done)
+        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done, model: model)
         cell!.isDoneDelegate = self
         return cell!
     }

@@ -71,6 +71,7 @@ class CustomTableViewCell: UITableViewCell {
         if  model.date! < Date(){
             model.isOverdue == true
             cellLabel.textColor = .red
+         
         }
     }
     
