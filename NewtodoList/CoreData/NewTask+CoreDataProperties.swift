@@ -20,6 +20,7 @@ extension NewTask {
     @NSManaged public var task: String?
     @NSManaged public var done: Bool
     @NSManaged public var isArchived:Bool
+    @NSManaged public var isOverdue:Bool
     @NSManaged public var taskDescription:String?
     @NSManaged public var date:Date?
     @NSManaged public var category:String?

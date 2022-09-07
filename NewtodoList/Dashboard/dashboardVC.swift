@@ -31,7 +31,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dashboardScrollView.contentSize = CGSize(width: 320, height: 1000)
+        dashboardScrollView.contentSize = CGSize(width: 700, height: 1000)
         dataProvider.getAllItems()
         
         dashboardScrollView.delegate = self

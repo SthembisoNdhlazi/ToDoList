@@ -118,11 +118,18 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
        
-        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "" ,specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short), isDone: model.done)
+        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "" ,specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .medium, timeStyle: .short), isDone: model.done, model: model)
+        
+        
         cell?.isDoneDelegate = self
+        
+    
+        
         return cell!
     }
+    //creating OverdueTasks:
     
+ 
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
        let vc = UIHostingController(rootView: addNewTask())
@@ -148,6 +155,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
         }
     }
+    
+ 
     
 }
 

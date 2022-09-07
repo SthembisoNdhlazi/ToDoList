@@ -23,6 +23,8 @@ class CustomTableViewCell: UITableViewCell {
     
     @IBOutlet weak var cellView: UIView!
     
+    let dataProvider = DataProvider()
+    
     var isDoneDelegate:isDone?
     
     override func awakeFromNib() {
@@ -51,7 +53,7 @@ class CustomTableViewCell: UITableViewCell {
     }
    
     
-    func setUpCell(task: String, taskDescription: String,specifiedDate: String, isDone: Bool){
+    func setUpCell(task: String, taskDescription: String,specifiedDate: String, isDone: Bool, model: NewTask){
         cellLabel.text = task
         descriptionLabel.text = taskDescription
         dateLabel.text = specifiedDate
@@ -65,7 +67,11 @@ class CustomTableViewCell: UITableViewCell {
       //  cellView.layer.borderWidth = 0.5
         
        // self.cellView.layer.masksToBounds = true
-  
+        
+        if  model.date! < Date(){
+            model.isOverdue == true
+            cellLabel.textColor = .red
+        }
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
