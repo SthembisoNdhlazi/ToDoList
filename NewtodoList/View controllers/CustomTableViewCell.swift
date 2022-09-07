@@ -53,13 +53,13 @@ class CustomTableViewCell: UITableViewCell {
     
     func setUpCell(task: String, taskDescription: String,specifiedDate: String, isDone: Bool){
         cellLabel.text = task
-        //descriptionLabel.text = taskDescription
-        //dateLabel.text = specifiedDate
+        descriptionLabel.text = taskDescription
+        dateLabel.text = specifiedDate
         
         if isDone{
-            checkButton.setImage(UIImage(systemName: "checkmark.circle.fill")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
+            checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
         } else{
-            checkButton.setImage(UIImage(systemName: "circle")?.withTintColor(.black,renderingMode:.alwaysOriginal), for: .normal)
+            checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
       //  cellView.layer.borderWidth = 0.5
