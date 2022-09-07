@@ -23,6 +23,12 @@ class WorkViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         tableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        dataProvider.getWorkItems()
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         dataProvider.models.count

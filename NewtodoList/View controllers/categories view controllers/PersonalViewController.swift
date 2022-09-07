@@ -23,6 +23,12 @@ class PersonalViewController: UIViewController, UITableViewDelegate, UITableView
         tableView.dataSource = self
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+       
+        dataProvider.getPersonalItems()
+        tableView.reloadData()
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         dataProvider.models.count

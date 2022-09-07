@@ -33,7 +33,10 @@ class DataProvider{
     func getUrgentItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category == 'Urgent'")
+        let archivePredicate = NSPredicate(format: "isArchived == 0")
+        let urgentPredicate = NSPredicate(format: "category == 'Urgent'")
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,urgentPredicate])
+        request.predicate = compoundPredicate
         
         
         
@@ -50,10 +53,12 @@ class DataProvider{
     func getPersonalItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category == 'Personal'")
+       
         
-        
-        
+        let archivePredicate = NSPredicate(format: "isArchived == 0")
+        let personalPredicate = NSPredicate(format: "category == 'Personal'")
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,personalPredicate])
+        request.predicate = compoundPredicate
         do{
             models = try context.fetch(request)
             
@@ -66,7 +71,10 @@ class DataProvider{
     func getWorkItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category == 'Work'")
+        let archivePredicate = NSPredicate(format: "isArchived == 0")
+        let workPredicate = NSPredicate(format: "category == 'Work'")
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,workPredicate])
+        request.predicate = compoundPredicate
         
         
         
@@ -136,7 +144,10 @@ class DataProvider{
     func getSchoolItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category == 'School'")
+        let archivePredicate = NSPredicate(format: "isArchived == 0")
+        let schoolPredicate = NSPredicate(format: "category == 'School'")
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,schoolPredicate])
+        request.predicate = compoundPredicate
         
         
         
@@ -152,7 +163,10 @@ class DataProvider{
     func getHomeItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
         
-        request.predicate = NSPredicate(format: "category == 'Home'")
+        let archivePredicate = NSPredicate(format: "isArchived == 0")
+        let homePredicate = NSPredicate(format: "category == 'Personal'")
+        let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,homePredicate])
+        request.predicate = compoundPredicate
         
         
         
