@@ -33,8 +33,8 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
         let model = dataProvider.models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
     
-        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done, model: model)
-        
+        cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done)
+        cell!.isDoneDelegate = self
         return cell!
     }
     
@@ -51,13 +51,13 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
                 print("Couldn't save")
             }
         }
-        let archive = UIContextualAction(style: .normal, title: "Unarchive"){ [self] (action, view, completionHandler) in
+        let archive = UIContextualAction(style: .normal, title: "Archive"){ [self] (action, view, completionHandler) in
             
             let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
         
-            dataProvider.getArchivedItems()
+            dataProvider.getHomeItems()
             tableView.reloadData()
             do{
                 try commit.managedObjectContext?.save()
@@ -86,5 +86,24 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     
 
   
+    func toggleDone(for index:Int){
+        
+        dataProvider.models[index].done.toggle()
+        do{
+            try dataProvider.context.save()
+        }catch{
+            
+        }
+    }
+}
 
+extension HomeViewController: isDone{
+    
+    func toggleIsDone(for cell: UITableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell){
+            toggleDone(for: indexPath.row)
+            tableView.reloadData()
+            dataProvider.getHomeItems()
+        }
+    }
 }
