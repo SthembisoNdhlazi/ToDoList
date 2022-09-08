@@ -190,7 +190,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? EditVC{
             destination.indexPath = tableView.indexPathForSelectedRow?.row
-    
+            destination.model = dataProvider.models[tableView.indexPathForSelectedRow?.row ?? 0]
         }
     }
     

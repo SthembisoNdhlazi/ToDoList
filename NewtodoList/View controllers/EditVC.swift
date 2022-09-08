@@ -18,16 +18,17 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     var pickerData = ["Work","School", "Urgent", "Home","Personal"]
     var selectedCategory: String?
    let dataProvider = DataProvider()
-    
+    var model : NewTask?
     var indexPath:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        dataProvider.getAllItems()
-        text.text = dataProvider.models[indexPath!].task
-        if ((dataProvider.models[indexPath!].taskDescription?.isEmpty) != nil){
-            descriptionView.text = dataProvider.models[indexPath!].taskDescription
+        //dataProvider.getAllItems()
+        text.text = model?.task
+        
+        if ((model?.taskDescription?.isEmpty) != nil){
+            descriptionView.text = model?.taskDescription
         }else{
             descriptionView.text = "this task doesn't have a description. \nAdd one"
         }
@@ -37,7 +38,7 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
         text.layer.borderWidth = 0.5
         text.layer.cornerRadius = text.frame.size.height/20
         
-        datePicker.date = dataProvider.models[indexPath!].date ?? Date()
+        datePicker.date = model?.date ?? Date()
         
         
         self.picker.delegate = self
@@ -48,11 +49,11 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
 
     
     @IBAction func saveTapped(_ sender: Any) {
-        let item = dataProvider.models[indexPath!]
+        let item = model
         let taskToUpdate = text.text
         let descriptionUpdate = descriptionView.text
         
-        dataProvider.updateItem(item: item, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date, category: selectedCategory)
+        dataProvider.updateItem(item: item!, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date, category: selectedCategory)
         
      
         self.navigationController?.popToRootViewController( animated: true)
