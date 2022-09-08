@@ -32,7 +32,8 @@ class DataProvider{
     
     func getUrgentItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
-        
+        let doneSort = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSort]
         let archivePredicate = NSPredicate(format: "isArchived == 0")
         let urgentPredicate = NSPredicate(format: "category == 'Urgent'")
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,urgentPredicate])
@@ -52,7 +53,8 @@ class DataProvider{
     
     func getPersonalItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
-        
+        let doneSort = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSort]
        
         
         let archivePredicate = NSPredicate(format: "isArchived == 0")
@@ -70,7 +72,8 @@ class DataProvider{
     }
     func getWorkItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
-        
+        let doneSort = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSort]
         let archivePredicate = NSPredicate(format: "isArchived == 0")
         let workPredicate = NSPredicate(format: "category == 'Work'")
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,workPredicate])
@@ -143,7 +146,8 @@ class DataProvider{
     
     func getSchoolItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
-        
+        let doneSort = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSort]
         let archivePredicate = NSPredicate(format: "isArchived == 0")
         let schoolPredicate = NSPredicate(format: "category == 'School'")
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,schoolPredicate])
@@ -162,7 +166,8 @@ class DataProvider{
     }
     func getHomeItems(){
         let request:NSFetchRequest<NewTask> = NewTask.fetchRequest()
-        
+        let doneSort = NSSortDescriptor(key: "done", ascending: true)
+        request.sortDescriptors = [doneSort]
         let archivePredicate = NSPredicate(format: "isArchived == 0")
         let homePredicate = NSPredicate(format: "category == 'Personal'")
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,homePredicate])

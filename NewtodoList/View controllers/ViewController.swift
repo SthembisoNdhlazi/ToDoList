@@ -38,9 +38,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.reloadData()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        print("Gone...")
-    }
+  
     
 
     
