@@ -50,8 +50,8 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         
         overduetotal = CGFloat(dataProvider.models.count)
         
-       // progressBar.didUpdateProgress()
-       print("wubba lubba dub dub \(progressBar.progressBarValue(value: donevalue, total: donetotal))")
+        progressBar.didUpdateProgress()
+    //   print("wubba lubba dub dub \(progressBar.progressBarValue(value: donevalue, total: donetotal))")
     }
     
 //    override func viewDidAppear(_ animated: Bool) {
@@ -60,27 +60,27 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Dashboard"
         dashboardScrollView.contentSize = CGSize(width: 380, height: 1000)
         dataProvider.getAllItems()
         
         
         dashboardScrollView.delegate = self
         
-       for item in self.dataProvider.models{
-           if item.done == true{
-            self.countFired += 1
-            DispatchQueue.main.async {
-                self.progressBar.doneprogress = min(0 * self.countFired, 1)
-                self.dataProvider.getAllItems()
-                
-            }
-               
-        }
-           
-      
-    }
-        
+//       for item in self.dataProvider.models{
+//           if item.done == true{
+//            self.countFired += 1
+//            DispatchQueue.main.async {
+//                self.progressBar.doneprogress = min(0 * self.countFired, 1)
+//                self.dataProvider.getAllItems()
+//
+//            }
+//
+//        }
+//
+//
+//    }
+//
         
         //Customising the UIView SHortcuts
         

@@ -85,13 +85,21 @@
                                                             <color key="textColor" systemColor="placeholderTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Overdue" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3bX-q5-RV4">
+                                                            <rect key="frame" x="271.33333333333331" y="5" width="58.666666666666686" height="18"/>
+                                                            <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <constraints>
                                                         <constraint firstItem="uPu-JT-fa1" firstAttribute="leading" secondItem="MY4-aO-VOJ" secondAttribute="leading" constant="20" id="3Ui-Ot-PN6"/>
+                                                        <constraint firstAttribute="trailing" secondItem="3bX-q5-RV4" secondAttribute="trailing" constant="60" id="4I3-Mp-Dsj"/>
                                                         <constraint firstItem="H2s-Is-JAF" firstAttribute="leading" secondItem="MY4-aO-VOJ" secondAttribute="leading" constant="20" id="5G1-hy-9Wz"/>
                                                         <constraint firstAttribute="bottom" secondItem="uPu-JT-fa1" secondAttribute="bottom" constant="40" id="Bi7-Zs-FqE"/>
                                                         <constraint firstItem="uPu-JT-fa1" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="5" id="Em7-gc-8al"/>
+                                                        <constraint firstItem="3bX-q5-RV4" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="5" id="KeJ-lV-KUX"/>
                                                         <constraint firstAttribute="bottom" secondItem="EJX-6H-Jcv" secondAttribute="bottom" constant="5" id="P4a-Kq-1Uc"/>
                                                         <constraint firstItem="aUa-o3-jRh" firstAttribute="top" secondItem="MY4-aO-VOJ" secondAttribute="top" constant="5" id="afC-ds-H7Z"/>
                                                         <constraint firstAttribute="trailing" secondItem="aUa-o3-jRh" secondAttribute="trailing" id="daL-vU-l6o"/>
@@ -115,6 +123,7 @@
                                             <outlet property="checkButton" destination="aUa-o3-jRh" id="37N-wi-xw1"/>
                                             <outlet property="dateLabel" destination="EJX-6H-Jcv" id="Y4e-LQ-ysh"/>
                                             <outlet property="descriptionLabel" destination="H2s-Is-JAF" id="eHe-eW-xYb"/>
+                                            <outlet property="overdueLabel" destination="3bX-q5-RV4" id="dnf-zi-r5H"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
