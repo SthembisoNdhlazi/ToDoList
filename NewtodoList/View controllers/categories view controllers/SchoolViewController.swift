@@ -24,7 +24,7 @@ class SchoolViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
     override func viewWillAppear(_ animated: Bool) {
         
-        dataProvider.getUrgentItems()
+        dataProvider.getSchoolItems()
         tableView.reloadData()
     }
     
