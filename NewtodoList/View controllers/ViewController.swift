@@ -9,12 +9,51 @@ import UIKit
 import CoreData
 import SwiftUI
 
+
+
 class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSource{
    
-
+  
+    
+    var menuItems: [UIAction] {
+        return [
+            UIAction(title: "All tasks"){ (action) in
+                self.dataProvider.getAllItems()
+                self.tableView.reloadData()
+            },
+            UIAction(title: "Work tasks"){ (action) in
+                self.dataProvider.getWorkItems()
+                self.tableView.reloadData()
+            },
+            UIAction(title: "School tasks"){ (action) in
+                self.dataProvider.getSchoolItems()
+                self.tableView.reloadData()
+            },
+            UIAction(title: "Personal tasks"){ (action) in
+                self.dataProvider.getPersonalItems()
+                self.tableView.reloadData()
+            },
+            UIAction(title: "Home tasks"){ (action) in
+                self.dataProvider.getHomeItems()
+                self.tableView.reloadData()
+            },
+            UIAction(title: "Urgent tasks"){ (action) in
+                self.dataProvider.getUrgentItems()
+                self.tableView.reloadData()
+            }
+           
+        ]
+    }
+    
+    var demoMenu: UIMenu {
+        return UIMenu(title: "Filter tasks", image: nil, identifier: nil, options: [], children: menuItems)
+    }
+    @IBOutlet weak var filterButton: UIBarButtonItem!
+    
     @IBOutlet weak var tableView: UITableView!
     
-  
+   
+    
     let dataProvider = DataProvider()
     
     
@@ -30,7 +69,8 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         tableView.dataSource = self
         tableView.reloadData()
         
-       // print(FileManager.default.urls(for: .documentDirectory, in: .userDomainMask))
+        filterButton.menu = demoMenu
+       
     }
     
     override func viewWillAppear(_ animated: Bool) {

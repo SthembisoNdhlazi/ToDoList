@@ -140,6 +140,7 @@
                     </tabBarItem>
                     <navigationItem key="navigationItem" title="todolist" id="hou-UX-1jP"/>
                     <connections>
+                        <outlet property="filterButton" destination="iBc-iP-S2Z" id="ZZE-e9-II4"/>
                         <outlet property="tableView" destination="i7u-Lt-e1f" id="Sli-p3-dAI"/>
                         <segue destination="4aV-TL-25S" kind="show" identifier="viewTask" id="Ha2-D1-5PN"/>
                     </connections>
