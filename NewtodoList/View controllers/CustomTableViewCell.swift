@@ -14,6 +14,7 @@ protocol isDone{
 
 class CustomTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var overdueLabel: UILabel!
     @IBOutlet weak var cellLabel: UILabel!
     
     @IBOutlet weak var dateLabel: UILabel!
@@ -43,13 +44,7 @@ class CustomTableViewCell: UITableViewCell {
         cellView.layer.shadowRadius = 5
         cellView.layer.shadowOpacity = 1
         
-        //this works
-//        self.cellView!.layer.shadowOffset = CGSize(width: 3, height: 2)
-//        self.cellView!.layer.shadowColor = UIColor.black.cgColor
-//        self.cellView!.layer.shadowRadius = 4
-//        self.cellView!.layer.shadowOpacity = 0.50
-//        self.cellView!.layer.masksToBounds = false;
-//        self.cellView!.clipsToBounds = false;
+
     }
    
     
@@ -60,6 +55,9 @@ class CustomTableViewCell: UITableViewCell {
         
         if isDone{
             checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
+            cellLabel.textColor = .black
+            overdueLabel.isHidden = true
+            model.isOverdue.toggle()
         } else{
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
@@ -68,10 +66,15 @@ class CustomTableViewCell: UITableViewCell {
         
        // self.cellView.layer.masksToBounds = true
         
-        if  model.date! < Date(){
+        if  model.date! != Date() || model.date! < Date() {
             model.isOverdue == true
             cellLabel.textColor = .red
-         
+            overdueLabel.text = "Overdue"
+            overdueLabel.isHidden = false
+            overdueLabel.textColor = .red
+        }else{
+            cellLabel.textColor = .black
+            overdueLabel.isHidden = true
         }
     }
     

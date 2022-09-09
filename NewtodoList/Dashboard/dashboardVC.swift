@@ -26,6 +26,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var allTaskView: UIView!
     @IBOutlet weak var archiveUIView: UIView!
     @IBOutlet weak var progressBar: ProgressBarVC!
+    @IBOutlet weak var overdueProgressBar: ProgressBarVC!
     
    var countFired: CGFloat = 0
     var donetotal: CGFloat = 0.0
@@ -41,8 +42,9 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         donevalue = CGFloat(dataProvider.models.filter{
             $0.done
         }.count)
-        
+        print("donVale:\(donevalue)")
         donetotal = CGFloat(dataProvider.models.count)
+        print("doneTotal:\(donetotal)")
      
         overduevalue = CGFloat(dataProvider.models.filter{
             $0.isOverdue
@@ -50,37 +52,44 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         
         overduetotal = CGFloat(dataProvider.models.count)
         
-       // progressBar.didUpdateProgress()
-       print("wubba lubba dub dub \(progressBar.progressBarValue(value: donevalue, total: donetotal))")
+    
     }
     
-//    override func viewDidAppear(_ animated: Bool) {
-//        progressBar.didUpdateProgress()
-//    }
+   
+    
+   override func viewDidAppear(_ animated: Bool) {
+       super .viewDidAppear(animated)
+       progressBar.dashboardClass = self
+       progressBar.didUpdateProgress()
+       overdueProgressBar.overDueDidUpdateProgress()
+       
+      
+      
+   }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        title = "Dashboard"
         dashboardScrollView.contentSize = CGSize(width: 380, height: 1000)
         dataProvider.getAllItems()
         
         
         dashboardScrollView.delegate = self
         
-       for item in self.dataProvider.models{
-           if item.done == true{
-            self.countFired += 1
-            DispatchQueue.main.async {
-                self.progressBar.doneprogress = min(0 * self.countFired, 1)
-                self.dataProvider.getAllItems()
-                
-            }
-               
-        }
-           
-      
-    }
-        
+//       for item in self.dataProvider.models{
+//           if item.done == true{
+//            self.countFired += 1
+//            DispatchQueue.main.async {
+//                self.progressBar.doneprogress = min(0 * self.countFired, 1)
+//                self.dataProvider.getAllItems()
+//
+//            }
+//
+//        }
+//
+//
+//    }
+//
         
         //Customising the UIView SHortcuts
         

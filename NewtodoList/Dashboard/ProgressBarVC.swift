@@ -7,6 +7,8 @@
 import UIKit
 
 class ProgressBarVC: UIView{
+    
+     var dashboardClass = dashboardVC()
  
     @IBInspectable public  var startGradientColor: UIColor = UIColor.green
     @IBInspectable public  var endGradientColor: UIColor = UIColor.systemTeal
@@ -19,46 +21,70 @@ class ProgressBarVC: UIView{
     var textLayer : CATextLayer!
     var gradientLayer: CAGradientLayer!
     
-    var doneprogress : CGFloat = 0.0
-    var overdueprogress : CGFloat = 0.0
+    var doneprogress : CGFloat = 0.1
+    var overdueprogress : CGFloat = 0.1
     
     var okayPatsVar : CGFloat = 0.0
-   var dashboardClass = dashboardVC()
-    
 
+    
+   
     
     
     override func draw(_ rect: CGRect) {
         
+        prepareView()
         
+    }
+    
+    func prepareView(){
         
-        //drawing code
         guard layer.sublayers == nil else{return} // stops it from duplicating layers
-        let width = rect.width
-        let height = rect.height
+        let width = bounds.width
+        let height = bounds.height
         
         let lineWidth = 0.1 * min(width, height)
         
-        foregroundLayer = createCircularLayer(rect: rect, strokeColor: UIColor.green.cgColor , fillColor: UIColor.clear.cgColor, lineWidth: lineWidth)
+        foregroundLayer = createCircularLayer(rect: bounds, strokeColor: UIColor.green.cgColor , fillColor: UIColor.clear.cgColor, lineWidth: lineWidth)
         
-        backgroundLayer = createCircularLayer(rect: rect, strokeColor: backgroundCircleColor.cgColor, fillColor: UIColor.clear.cgColor, lineWidth: lineWidth)
+        backgroundLayer = createCircularLayer(rect: bounds, strokeColor: backgroundCircleColor.cgColor, fillColor: UIColor.clear.cgColor, lineWidth: lineWidth)
         
        gradientLayer = CAGradientLayer()
         gradientLayer.startPoint = CGPoint(x: 0.5, y: 0.0)
         gradientLayer.endPoint = CGPoint(x: 0.5, y: 1.0)
         gradientLayer.colors = [startGradientColor.cgColor, endGradientColor.cgColor]
-        gradientLayer.frame = rect
+        gradientLayer.frame = bounds
         gradientLayer.mask = foregroundLayer
         
-        textLayer = createATextLayer(rect: rect, textColor: textColor.cgColor)
+        textLayer = createATextLayer(rect: bounds, textColor: textColor.cgColor)
     
        
         layer.addSublayer(backgroundLayer)
         layer.addSublayer(gradientLayer)
         layer.addSublayer(textLayer)
-        
-        
     }
+    
+    func didUpdateProgress(){
+        let textValue = (dashboardClass.donevalue/dashboardClass.donetotal) * 100
+       // let endTotalOfDoneTasks = (dashboardClass.donetotal) * 100
+       // let formattedDoneTask = String(format: "%.0f", endTotalOfDoneTasks)
+        let formattedTextValue = String(format: "%.0f", textValue)
+        textLayer?.string = "\(formattedTextValue)%"
+        textLayer.fontSize = 26
+        
+        foregroundLayer?.strokeEnd = textValue
+        
+       
+    }
+    
+    func overDueDidUpdateProgress(){
+        let textValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
+        let formattedTextValue = String(format: "%.0f", textValue)
+        textLayer?.string = "\(formattedTextValue)%"
+        textLayer.fontSize = 26
+        
+        foregroundLayer?.strokeEnd = textValue
+    }
+    
     private func createCircularLayer(rect: CGRect,strokeColor: CGColor, fillColor: CGColor, lineWidth: CGFloat) -> CAShapeLayer{
         
         //drawing code
@@ -94,7 +120,7 @@ class ProgressBarVC: UIView{
         let offset = min(width, height) * 0.1
         
         let layer = CATextLayer()
-        layer.string = "\((dashboardClass.donevalue/dashboardClass.donetotal) * 100 )"
+        layer.string = "?"
         //(NewTask.task?.count)
         layer.backgroundColor = UIColor.clear.cgColor
         layer.foregroundColor = textColor
@@ -103,36 +129,32 @@ class ProgressBarVC: UIView{
         layer.alignmentMode = .center
         
         return layer
+        
+      
     }
     
-    func didUpdateProgress(){
-       // okayPatsVar = (dashboardClass.donevalue/dashboardClass.donetotal)
-        
-      //  textLayer?.string = "\(okayPatsVar * 100)"
-     //   foregroundLayer?.strokeEnd = progressBarValue(value: dashboardClass.donevalue, total: dashboardClass.donetotal)
-       
-       // foregroundLayer?.strokeEnd = 0
-       
-    }
+  
  
 
 
 
 
-    func progressBarValue(value: CGFloat, total: CGFloat)->CGFloat{
-        let percentage = value/total
-        print(percentage)
-        print(value)
-        print(total)
-      
-        if  percentage.isNaN || percentage.isInfinite {
-            return 0.0
-            
-        }else{
-        return percentage
-        }
-        
-        
-    }
+//    func progressBarValue(value: CGFloat, total: CGFloat)->CGFloat{
+//        let percentage = value/total
+//        print(percentage)
+//        print(value)
+//        print(total)
+//
+//        if  percentage.isNaN || percentage.isInfinite {
+//            return 0.0
+//
+//        }else{
+//        return percentage
+//        }
+//
+//
+//    }
+    
+   // progressBarValue(value: dashboardClass.donevalue, total: dashboardClass.donetotal)
 }
 

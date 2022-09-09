@@ -18,7 +18,7 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
 
         // Do any additional setup after loading the view.
         dataProvider.getArchivedItems()
-       title = "Archived tasks📨"
+       title = "Archived tasks"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
