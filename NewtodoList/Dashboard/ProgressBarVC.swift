@@ -76,6 +76,15 @@ class ProgressBarVC: UIView{
        
     }
     
+    func overDueDidUpdateProgress(){
+        let textValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
+        let formattedTextValue = String(format: "%.0f", textValue)
+        textLayer?.string = "\(formattedTextValue)%"
+        textLayer.fontSize = 26
+        
+        foregroundLayer?.strokeEnd = textValue
+    }
+    
     private func createCircularLayer(rect: CGRect,strokeColor: CGColor, fillColor: CGColor, lineWidth: CGFloat) -> CAShapeLayer{
         
         //drawing code

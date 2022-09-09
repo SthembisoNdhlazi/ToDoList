@@ -26,6 +26,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     @IBOutlet weak var allTaskView: UIView!
     @IBOutlet weak var archiveUIView: UIView!
     @IBOutlet weak var progressBar: ProgressBarVC!
+    @IBOutlet weak var overdueProgressBar: ProgressBarVC!
     
    var countFired: CGFloat = 0
     var donetotal: CGFloat = 0.0
@@ -51,8 +52,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         
         overduetotal = CGFloat(dataProvider.models.count)
         
-       // progressBar.didUpdateProgress()
-    //   print("wubba lubba dub dub \(progressBar.progressBarValue(value: donevalue, total: donetotal))")
+    
     }
     
    
@@ -61,6 +61,9 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
        super .viewDidAppear(animated)
        progressBar.dashboardClass = self
        progressBar.didUpdateProgress()
+       overdueProgressBar.overDueDidUpdateProgress()
+       
+      
       
    }
     

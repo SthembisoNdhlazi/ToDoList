@@ -1032,6 +1032,7 @@
                         <outlet property="dashboardScrollView" destination="pG8-BF-9vV" id="k1a-Sy-XxN"/>
                         <outlet property="homeUIView" destination="03c-r3-VO8" id="IFX-fC-Wdu"/>
                         <outlet property="overDueTasks" destination="0Zn-hD-PgI" id="MGG-3H-G6R"/>
+                        <outlet property="overdueProgressBar" destination="j3s-F4-WLt" id="Aa1-ht-s3W"/>
                         <outlet property="personalUIView" destination="TR6-dx-GUr" id="92I-6r-UOA"/>
                         <outlet property="progressBar" destination="MEM-Pe-eEK" id="Og4-5v-89q"/>
                         <outlet property="schoolUIView" destination="8MP-aj-R2k" id="5oq-2S-zjK"/>
