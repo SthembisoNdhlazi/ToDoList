@@ -65,7 +65,11 @@ class ProgressBarVC: UIView{
     
     func didUpdateProgress(){
         let textValue = (dashboardClass.donevalue/dashboardClass.donetotal) * 100
-        textLayer?.string = "\(textValue)"
+       // let endTotalOfDoneTasks = (dashboardClass.donetotal) * 100
+       // let formattedDoneTask = String(format: "%.0f", endTotalOfDoneTasks)
+        let formattedTextValue = String(format: "%.0f", textValue)
+        textLayer?.string = "\(formattedTextValue)%"
+        textLayer.fontSize = 26
         
         foregroundLayer?.strokeEnd = textValue
         
