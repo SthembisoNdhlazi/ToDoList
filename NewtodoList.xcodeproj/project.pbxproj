@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD772BD628C769D700F87651 /* dashboardVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD772BD528C769D700F87651 /* dashboardVC.swift */; };
 		AD7BB9C628C65B8C00E45619 /* ViewTaskDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7BB9C528C65B8C00E45619 /* ViewTaskDetail.swift */; };
+		AD8CF14728D0A236002850B9 /* OverDueProgressBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD8CF14628D0A236002850B9 /* OverDueProgressBarVC.swift */; };
 		ADF6816928C7524C00B4AD88 /* ProgressBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADF6816828C7524C00B4AD88 /* ProgressBarVC.swift */; };
 		B878865C28B6247B0057D719 /* ArchiveViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B878865B28B6247B0057D719 /* ArchiveViewController.swift */; };
 		B87930E728BE6840004BD0F8 /* EditVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B87930E628BE6840004BD0F8 /* EditVC.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		AD772BD528C769D700F87651 /* dashboardVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dashboardVC.swift; sourceTree = "<group>"; };
 		AD7BB9C528C65B8C00E45619 /* ViewTaskDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewTaskDetail.swift; sourceTree = "<group>"; };
+		AD8CF14628D0A236002850B9 /* OverDueProgressBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverDueProgressBarVC.swift; sourceTree = "<group>"; };
 		ADF6816828C7524C00B4AD88 /* ProgressBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressBarVC.swift; sourceTree = "<group>"; };
 		B878865B28B6247B0057D719 /* ArchiveViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArchiveViewController.swift; sourceTree = "<group>"; };
 		B87930E628BE6840004BD0F8 /* EditVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditVC.swift; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 			children = (
 				ADF6816828C7524C00B4AD88 /* ProgressBarVC.swift */,
 				AD772BD528C769D700F87651 /* dashboardVC.swift */,
+				AD8CF14628D0A236002850B9 /* OverDueProgressBarVC.swift */,
 			);
 			path = Dashboard;
 			sourceTree = "<group>";
@@ -236,6 +239,7 @@
 				B878865C28B6247B0057D719 /* ArchiveViewController.swift in Sources */,
 				AD772BD628C769D700F87651 /* dashboardVC.swift in Sources */,
 				B87FD0D228C890C2009B4A0A /* UrgentViewController.swift in Sources */,
+				AD8CF14728D0A236002850B9 /* OverDueProgressBarVC.swift in Sources */,
 				B87930E728BE6840004BD0F8 /* EditVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
