@@ -24,7 +24,6 @@ class ProgressBarVC: UIView{
     var doneprogress : CGFloat = 0.1
     var overdueprogress : CGFloat = 0.1
     
-    var okayPatsVar : CGFloat = 0.0
 
     
    
@@ -63,26 +62,23 @@ class ProgressBarVC: UIView{
         layer.addSublayer(textLayer)
     }
     
-    func didUpdateProgress(){
-        let textValue = (dashboardClass.donevalue/dashboardClass.donetotal) * 100
-       // let endTotalOfDoneTasks = (dashboardClass.donetotal) * 100
-       // let formattedDoneTask = String(format: "%.0f", endTotalOfDoneTasks)
-        let formattedTextValue = String(format: "%.0f", textValue)
-        textLayer?.string = "\(formattedTextValue)%"
+    func completedDidUpdateProgress(){
+        let textValue1 = (dashboardClass.donevalue/dashboardClass.donetotal) * 100
+        let formattedTextValue1 = String(format: "%.0f", textValue1)
+        textLayer?.string = "\(formattedTextValue1)%"
         textLayer.fontSize = 26
-        
-        foregroundLayer?.strokeEnd = textValue
+        foregroundLayer?.strokeEnd = textValue1
         
        
     }
     
     func overDueDidUpdateProgress(){
-        let textValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
-        let formattedTextValue = String(format: "%.0f", textValue)
-        textLayer?.string = "\(formattedTextValue)%"
+        let textValue2 = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
+        let formattedTextValue2 = String(format: "%.0f", textValue2)
+        textLayer?.string = "\(formattedTextValue2)%"
         textLayer.fontSize = 26
         
-        foregroundLayer?.strokeEnd = textValue
+        foregroundLayer?.strokeEnd = textValue2
     }
     
     private func createCircularLayer(rect: CGRect,strokeColor: CGColor, fillColor: CGColor, lineWidth: CGFloat) -> CAShapeLayer{
@@ -132,29 +128,6 @@ class ProgressBarVC: UIView{
         
       
     }
-    
-  
- 
 
-
-
-
-//    func progressBarValue(value: CGFloat, total: CGFloat)->CGFloat{
-//        let percentage = value/total
-//        print(percentage)
-//        print(value)
-//        print(total)
-//
-//        if  percentage.isNaN || percentage.isInfinite {
-//            return 0.0
-//
-//        }else{
-//        return percentage
-//        }
-//
-//
-//    }
-    
-   // progressBarValue(value: dashboardClass.donevalue, total: dashboardClass.donetotal)
 }
 

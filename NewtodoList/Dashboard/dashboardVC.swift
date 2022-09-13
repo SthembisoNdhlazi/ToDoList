@@ -61,8 +61,8 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
        super .viewDidAppear(animated)
        
        progressBar.dashboardClass = self
-       overdueProgressBar.overDueDidUpdateProgress()
-       progressBar.didUpdateProgress()
+       progressBar.overDueDidUpdateProgress()
+       progressBar.completedDidUpdateProgress()
       
        
       
@@ -77,21 +77,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         
         
         dashboardScrollView.delegate = self
-        
-//       for item in self.dataProvider.models{
-//           if item.done == true{
-//            self.countFired += 1
-//            DispatchQueue.main.async {
-//                self.progressBar.doneprogress = min(0 * self.countFired, 1)
-//                self.dataProvider.getAllItems()
-//
-//            }
-//
-//        }
-//
-//
-//    }
-//
+
         
         //Customising the UIView SHortcuts
         
