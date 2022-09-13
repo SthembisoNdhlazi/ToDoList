@@ -61,9 +61,9 @@ class CustomTableViewCell: UITableViewCell {
         
         
         if  model.date! < Date() {
-            model.isOverdue == true
+            model.isOverdue = true
         }else{
-            model.isOverdue == false
+            model.isOverdue = false
         }
         
         if  model.isOverdue == true {
@@ -79,7 +79,7 @@ class CustomTableViewCell: UITableViewCell {
         
         if isDone{
             checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
-            model.isOverdue == false
+            model.isOverdue = false
             cellLabel.textColor = .black
             overdueLabel.isHidden = true
            
