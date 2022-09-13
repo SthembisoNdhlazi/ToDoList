@@ -44,6 +44,13 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
         self.picker.delegate = self
         self.picker.dataSource = self
         
+        let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
+    }
+    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
     }
     
 
