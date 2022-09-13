@@ -170,11 +170,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
  
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
-       let vc = UIHostingController(rootView: addNewTask())
-        vc.modalPresentationStyle = .fullScreen
-        
-        present(vc, animated: true)
-        
+      
     }
     
     func toggleDone(for index:Int){
@@ -190,7 +186,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? EditVC{
             destination.indexPath = tableView.indexPathForSelectedRow?.row
-    
+            destination.model = dataProvider.models[tableView.indexPathForSelectedRow?.row ?? 0]
         }
     }
     
@@ -204,7 +200,7 @@ extension ViewController: isDone{
         if let indexPath = tableView.indexPath(for: cell){
             toggleDone(for: indexPath.row)
             tableView.reloadData()
-            dataProvider.getAllItems()
+          
         }
     }
 }

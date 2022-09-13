@@ -87,10 +87,7 @@ class UrgentViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
    
     @IBAction func addTapped(_ sender: Any) {
-        let vc = UIHostingController(rootView: addNewTask())
-         vc.modalPresentationStyle = .fullScreen
-         
-         present(vc, animated: true)
+    
     }
     
     func toggleDone(for index:Int){

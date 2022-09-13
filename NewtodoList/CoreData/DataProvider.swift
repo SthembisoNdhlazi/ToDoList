@@ -169,7 +169,7 @@ class DataProvider{
         let doneSort = NSSortDescriptor(key: "done", ascending: true)
         request.sortDescriptors = [doneSort]
         let archivePredicate = NSPredicate(format: "isArchived == 0")
-        let homePredicate = NSPredicate(format: "category == 'Personal'")
+        let homePredicate = NSPredicate(format: "category == 'Home'")
         let compoundPredicate = NSCompoundPredicate(type: .and, subpredicates: [archivePredicate,homePredicate])
         request.predicate = compoundPredicate
         
