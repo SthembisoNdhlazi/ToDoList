@@ -17,27 +17,27 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     
     var menuItems: [UIAction] {
         return [
-            UIAction(title: "All tasks"){ (action) in
+            UIAction(title: "All tasks",  image: UIImage(systemName: "list.bullet.circle")){ (action) in
                 self.dataProvider.getAllItems()
                 self.tableView.reloadData()
             },
-            UIAction(title: "Work tasks"){ (action) in
+            UIAction(title: "Work tasks", image: UIImage(systemName: "building.2.crop.circle")){ (action) in
                 self.dataProvider.getWorkItems()
                 self.tableView.reloadData()
             },
-            UIAction(title: "School tasks"){ (action) in
+            UIAction(title: "School tasks", image: UIImage(systemName: "book.circle")){ (action) in
                 self.dataProvider.getSchoolItems()
                 self.tableView.reloadData()
             },
-            UIAction(title: "Personal tasks"){ (action) in
+            UIAction(title: "Personal tasks", image: UIImage(systemName: "person.circle")){ (action) in
                 self.dataProvider.getPersonalItems()
                 self.tableView.reloadData()
             },
-            UIAction(title: "Home tasks"){ (action) in
+            UIAction(title: "Home tasks", image: UIImage(systemName: "house.circle")){ (action) in
                 self.dataProvider.getHomeItems()
                 self.tableView.reloadData()
             },
-            UIAction(title: "Urgent tasks"){ (action) in
+            UIAction(title: "Urgent tasks", image: UIImage(systemName: "exclamationmark.triangle")){ (action) in
                 self.dataProvider.getUrgentItems()
                 self.tableView.reloadData()
             }
@@ -46,7 +46,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
     }
     
     var demoMenu: UIMenu {
-        return UIMenu(title: "Filter tasks", image: nil, identifier: nil, options: [], children: menuItems)
+        return UIMenu(title: "Filter tasks", image: UIImage(systemName: "line.3.horizontal.decrease.circle.fill"), identifier: nil, options: [], children: menuItems)
     }
     @IBOutlet weak var filterButton: UIBarButtonItem!
     
