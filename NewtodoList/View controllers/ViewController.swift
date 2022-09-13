@@ -170,11 +170,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
  
     
     @IBAction func addTask(_ sender: UIBarButtonItem) {
-       let vc = UIHostingController(rootView: addNewTask())
-        vc.modalPresentationStyle = .fullScreen
-        
-        present(vc, animated: true)
-        
+      
     }
     
     func toggleDone(for index:Int){
@@ -204,7 +200,7 @@ extension ViewController: isDone{
         if let indexPath = tableView.indexPath(for: cell){
             toggleDone(for: indexPath.row)
             tableView.reloadData()
-            dataProvider.getAllItems()
+          
         }
     }
 }

@@ -82,10 +82,7 @@ class HomeViewController: UIViewController,UITableViewDelegate, UITableViewDataS
     }
     
     @IBAction func addTapped(_ sender: Any) {
-        let vc = UIHostingController(rootView: addNewTask())
-         vc.modalPresentationStyle = .fullScreen
-         
-         present(vc, animated: true)
+      
     }
     
 
