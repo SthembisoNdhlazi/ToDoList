@@ -35,6 +35,7 @@ class ProgressBarVC: UIView{
         
     }
     
+    
     func prepareView(){
         
         guard layer.sublayers == nil else{return} // stops it from duplicating layers
@@ -60,6 +61,16 @@ class ProgressBarVC: UIView{
         layer.addSublayer(backgroundLayer)
         layer.addSublayer(gradientLayer)
         layer.addSublayer(textLayer)
+        
+    }
+    
+    func overdueUpdateProgress(){
+        let overdueTextValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
+        let overdueFormattedText = String(format: "%.0f", overdueTextValue)
+        textLayer?.string = "\(overdueFormattedText)%"
+        textLayer?.fontSize = 26
+        foregroundLayer?.strokeEnd = overdueTextValue
+        print("hello")
     }
     
     func completedUpdateProgress(){
@@ -71,14 +82,16 @@ class ProgressBarVC: UIView{
         
        
     }
-    
-    func overdueUpdateProgress(){
-        let overdueTextValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
-        let overdueFormattedText = String(format: "%.0f", overdueTextValue)
-        textLayer.string = "\(overdueFormattedText)%"
+    func archivedItemUpdateProgress(){
+        let textValue3 = (dashboardClass.archivedValue / dashboardClass.archivedTotal) * 100
+        let formattedTextValue3 = String(format: "%.0f", textValue3)
+        textLayer?.string = "\(formattedTextValue3)%"
         textLayer.fontSize = 26
-        foregroundLayer.strokeEnd = overdueTextValue
+        foregroundLayer?.strokeEnd = textValue3
+        
+        
     }
+    
   
     
     private func createCircularLayer(rect: CGRect,strokeColor: CGColor, fillColor: CGColor, lineWidth: CGFloat) -> CAShapeLayer{

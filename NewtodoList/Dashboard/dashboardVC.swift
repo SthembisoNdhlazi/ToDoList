@@ -34,6 +34,9 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
     //---
     var overduetotal: CGFloat = 0.0
     var overduevalue: CGFloat = 0.0
+    //----
+    var archivedTotal: CGFloat = 0.0
+    var archivedValue: CGFloat = 0.0
     
     override func viewWillAppear(_ animated: Bool) {
         self.navigationItem.title = "Your Title"
@@ -45,13 +48,18 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         print("donVale:\(donevalue)")
         donetotal = CGFloat(dataProvider.models.count)
         print("doneTotal:\(donetotal)")
-     
+     //overdue
         overduevalue = CGFloat(dataProvider.models.filter{
             $0.isOverdue
         }.count)
         print("overdueVale:\(overduevalue)")
         overduetotal = CGFloat(dataProvider.models.count)
         print("overduetotal:\(overduetotal)")
+    //archived
+        archivedValue = CGFloat(dataProvider.models.filter{
+            $0.isArchived
+        }.count)
+        archivedValue = CGFloat(dataProvider.models.count)
     
     }
     
@@ -61,8 +69,13 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
        super .viewDidAppear(animated)
        
        progressBar.dashboardClass = self
-       progressBar.overdueUpdateProgress()
+      
+       overdueProgressBar.overdueUpdateProgress()
+     
        progressBar.completedUpdateProgress()
+       
+       
+     //   progressBar.archivedItemUpdateProgress()
       
        
       
@@ -75,7 +88,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         dashboardScrollView.contentSize = CGSize(width: 380, height: 1000)
         dataProvider.getAllItems()
         
-        
+       
         dashboardScrollView.delegate = self
 
         

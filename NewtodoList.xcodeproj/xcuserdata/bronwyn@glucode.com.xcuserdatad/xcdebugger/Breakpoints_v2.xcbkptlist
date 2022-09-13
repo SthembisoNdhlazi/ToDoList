@@ -14,9 +14,9 @@
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "68"
-            endingLineNumber = "68"
-            landmarkName = "completedDidUpdateProgress()"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "completedUpdateProgress()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -30,9 +30,9 @@
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "completedDidUpdateProgress()"
+            startingLineNumber = "81"
+            endingLineNumber = "81"
+            landmarkName = "completedUpdateProgress()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -46,8 +46,8 @@
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "118"
-            endingLineNumber = "118"
+            startingLineNumber = "131"
+            endingLineNumber = "131"
             landmarkName = "createATextLayer(rect:textColor:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "119"
-            endingLineNumber = "119"
+            startingLineNumber = "132"
+            endingLineNumber = "132"
             landmarkName = "createATextLayer(rect:textColor:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -78,8 +78,8 @@
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
             landmarkName = "prepareView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -87,16 +87,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "446C7544-6820-443B-A706-7EA5DCE570B6"
+            uuid = "A78F6E08-E964-4F26-ACBC-B2FDF7B64BCF"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "NewtodoList/Dashboard/ProgressBarVC.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "78"
-            endingLineNumber = "78"
-            landmarkName = "overdueUpdateProgress()"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "completedUpdateProgress()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
