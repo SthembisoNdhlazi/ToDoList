@@ -51,7 +51,7 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
         }.count)
         print("overdueVale:\(overduevalue)")
         overduetotal = CGFloat(dataProvider.models.count)
-        print("overdueVale:\(overduetotal)")
+        print("overduetotal:\(overduetotal)")
     
     }
     
@@ -61,8 +61,8 @@ class dashboardVC :  UIViewController, UIScrollViewDelegate {
        super .viewDidAppear(animated)
        
        progressBar.dashboardClass = self
-       progressBar.overDueDidUpdateProgress()
-       progressBar.completedDidUpdateProgress()
+       progressBar.overdueUpdateProgress()
+       progressBar.completedUpdateProgress()
       
        
       

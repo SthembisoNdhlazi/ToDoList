@@ -62,7 +62,7 @@ class ProgressBarVC: UIView{
         layer.addSublayer(textLayer)
     }
     
-    func completedDidUpdateProgress(){
+    func completedUpdateProgress(){
         let textValue1 = (dashboardClass.donevalue/dashboardClass.donetotal) * 100
         let formattedTextValue1 = String(format: "%.0f", textValue1)
         textLayer?.string = "\(formattedTextValue1)%"
@@ -72,14 +72,14 @@ class ProgressBarVC: UIView{
        
     }
     
-    func overDueDidUpdateProgress(){
-        let textValue2 = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
-        let formattedTextValue2 = String(format: "%.0f", textValue2)
-        textLayer?.string = "\(formattedTextValue2)%"
+    func overdueUpdateProgress(){
+        let overdueTextValue = (dashboardClass.overduevalue/dashboardClass.overduetotal) * 100
+        let overdueFormattedText = String(format: "%.0f", overdueTextValue)
+        textLayer.string = "\(overdueFormattedText)%"
         textLayer.fontSize = 26
-        
-        foregroundLayer?.strokeEnd = textValue2
+        foregroundLayer.strokeEnd = overdueTextValue
     }
+  
     
     private func createCircularLayer(rect: CGRect,strokeColor: CGColor, fillColor: CGColor, lineWidth: CGFloat) -> CAShapeLayer{
         
@@ -116,8 +116,8 @@ class ProgressBarVC: UIView{
         let offset = min(width, height) * 0.1
         
         let layer = CATextLayer()
-        layer.string = "?"
-        //(NewTask.task?.count)
+        layer.string = "0"
+        
         layer.backgroundColor = UIColor.clear.cgColor
         layer.foregroundColor = textColor
         layer.fontSize = fontSize
