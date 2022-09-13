@@ -81,6 +81,7 @@
 		B87930E428BE6708004BD0F8 /* CoreData */ = {
 			isa = PBXGroup;
 			children = (
+				B8AB786528AFFC8B00DDFE8C /* NewtodoList.xcdatamodeld */,
 				B8AB787A28B4F21000DDFE8C /* NewTask+CoreDataClass.swift */,
 				B8AB787B28B4F21000DDFE8C /* NewTask+CoreDataProperties.swift */,
 				B87B034A28C129B1003BE8D4 /* DataProvider.swift */,
@@ -142,7 +143,6 @@
 				B8AB786228AFFC8B00DDFE8C /* Main.storyboard */,
 				B8AB786A28AFFC9100DDFE8C /* LaunchScreen.storyboard */,
 				B8AB786D28AFFC9100DDFE8C /* Info.plist */,
-				B8AB786528AFFC8B00DDFE8C /* NewtodoList.xcdatamodeld */,
 			);
 			path = NewtodoList;
 			sourceTree = "<group>";

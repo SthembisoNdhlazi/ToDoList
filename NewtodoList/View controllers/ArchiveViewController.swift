@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import CoreData
 
 class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 

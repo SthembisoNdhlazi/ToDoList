@@ -6,6 +6,8 @@
 //
 
 import UIKit
+import Foundation
+import CoreData
 
 protocol isDone{
     func toggleIsDone(for cell:UITableViewCell)
@@ -31,7 +33,10 @@ class CustomTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+     
     }
+    
+   
     override func layoutSubviews() {
         super.layoutSubviews()
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
@@ -52,6 +57,25 @@ class CustomTableViewCell: UITableViewCell {
         cellLabel.text = task
         descriptionLabel.text = taskDescription
         dateLabel.text = specifiedDate
+        print("OVERDUE VALUE \(model.isOverdue)")
+        
+        
+        if  model.date! < Date() {
+            model.isOverdue == true
+        }else{
+            model.isOverdue == false
+        }
+        
+        if  model.isOverdue == true {
+            cellLabel.textColor = .red
+            overdueLabel.text = "Overdue"
+            overdueLabel.isHidden = false
+            overdueLabel.textColor = .red
+        }else{
+            cellLabel.textColor = .black
+            overdueLabel.isHidden = true
+        }
+        
         
         if isDone{
             checkButton.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .normal)
@@ -63,20 +87,9 @@ class CustomTableViewCell: UITableViewCell {
             checkButton.setImage(UIImage(systemName: "circle"), for: .normal)
         }
         contentView.frame = contentView.frame.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-      //  cellView.layer.borderWidth = 0.5
+      
         
-       // self.cellView.layer.masksToBounds = true
-        
-        if  model.date! < Date() {
-            model.isOverdue == true
-            cellLabel.textColor = .red
-            overdueLabel.text = "Overdue"
-            overdueLabel.isHidden = false
-            overdueLabel.textColor = .red
-        }else{
-            cellLabel.textColor = .black
-            overdueLabel.isHidden = true
-        }
+     
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
