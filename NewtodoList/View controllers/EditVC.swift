@@ -46,6 +46,22 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
+        selectedCategory = model?.category
+        
+            if selectedCategory == pickerData[0]{
+                picker.selectRow(0, inComponent: 0, animated: true)
+                
+            }else  if selectedCategory == pickerData[1]{
+                picker.selectRow(1, inComponent: 0, animated: true)
+            }else if selectedCategory == pickerData[2]{
+                picker.selectRow(2, inComponent: 0, animated: true)
+            } else  if selectedCategory == pickerData[3]{
+                picker.selectRow(3, inComponent: 0, animated: true)
+            } else  if selectedCategory == pickerData[4]{
+                picker.selectRow(4, inComponent: 0, animated: true)
+            }
+        
+        
         
     }
     

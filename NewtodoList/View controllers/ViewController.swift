@@ -20,26 +20,32 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
             UIAction(title: "All tasks",  image: UIImage(systemName: "list.bullet.circle")){ (action) in
                 self.dataProvider.getAllItems()
                 self.tableView.reloadData()
+                self.filterButton.image = UIImage(systemName: "list.bullet.circle")
             },
-            UIAction(title: "Work tasks", image: UIImage(systemName: "building.2.crop.circle")){ (action) in
+            UIAction(title: "Work tasks", image: UIImage(systemName: "building.2.crop.circle")){ [self] (action) in
                 self.dataProvider.getWorkItems()
                 self.tableView.reloadData()
+                filterButton.image = UIImage(systemName: "building.2.crop.circle")
             },
             UIAction(title: "School tasks", image: UIImage(systemName: "book.circle")){ (action) in
                 self.dataProvider.getSchoolItems()
                 self.tableView.reloadData()
+                self.filterButton.image = UIImage(systemName: "book.circle")
             },
             UIAction(title: "Personal tasks", image: UIImage(systemName: "person.circle")){ (action) in
                 self.dataProvider.getPersonalItems()
                 self.tableView.reloadData()
+                self.filterButton.image = UIImage(systemName: "person.circle")
             },
             UIAction(title: "Home tasks", image: UIImage(systemName: "house.circle")){ (action) in
                 self.dataProvider.getHomeItems()
                 self.tableView.reloadData()
+                self.filterButton.image = UIImage(systemName: "house.circle")
             },
             UIAction(title: "Urgent tasks", image: UIImage(systemName: "exclamationmark.triangle")){ (action) in
                 self.dataProvider.getUrgentItems()
                 self.tableView.reloadData()
+                self.filterButton.image = UIImage(systemName: "exclamationmark.triangle")
             }
            
         ]
