@@ -35,17 +35,26 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
+        
+      
+            
         let model = dataProvider.models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
     
         cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done, model: model)
-        
-        return cell!
+            
+            return cell!
+       
+      
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .normal, title: "Delete"){ [self] (action, view, completionHandler) in
+        let delete = UIContextualAction(style: .destructive, title: "Delete"){ [self] (action, view, completionHandler) in
             
+            let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this task?", preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
+            let deleteAction = UIAlertAction(title: "Yes", style: .default){
+                [unowned self] action in
             let commit = dataProvider.models[indexPath.row]
             commit.managedObjectContext?.delete(commit)
             dataProvider.models.remove(at: indexPath.row)
@@ -55,7 +64,14 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
             } catch {
                 print("Couldn't save")
             }
+            }
+            deleteAlert.addAction(deleteAction)
+            deleteAlert.addAction(cancelAction)
+            
+            self.present(deleteAlert, animated: true)
         }
+           
+            
         let archive = UIContextualAction(style: .normal, title: "Unarchive"){ [self] (action, view, completionHandler) in
             
             let commit = dataProvider.models[indexPath.row]

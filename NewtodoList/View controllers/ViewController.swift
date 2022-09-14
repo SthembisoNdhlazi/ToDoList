@@ -87,6 +87,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
         let delete = UIContextualAction(style: .normal, title: "Delete"){ (action, view, completionHandler) in
             let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this task?", preferredStyle: .alert)
             
+            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
             let deleteAction = UIAlertAction(title: "Yes", style: .default){
                 [unowned self] action in
                 
@@ -104,7 +105,7 @@ class ViewController: UIViewController, UITableViewDelegate,UITableViewDataSourc
                 
             
             }
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+           
             deleteAlert.addAction(deleteAction)
             deleteAlert.addAction(cancelAction)
             
