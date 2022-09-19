@@ -1,13 +1,13 @@
 //
-//  EditViewController.swift
+//  NewTaskViewController.swift
 //  NewtodoList
 //
-//  Created by Sthembiso Ndhlazi on 2022/08/30.
+//  Created by Sthembiso Ndhlazi on 2022/09/13.
 //
 
 import UIKit
 
-class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
+class NewTaskViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
 
     @IBOutlet weak var datePicker: UIDatePicker!
     @IBOutlet weak var descriptionView: UITextView!
@@ -24,14 +24,11 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        //dataProvider.getAllItems()
-        text.text = model?.task
+       
+        text.placeholder = "Enter the task name"
         
-        if ((model?.taskDescription?.isEmpty) != nil){
-            descriptionView.text = model?.taskDescription
-        }else{
-            descriptionView.text = "this task doesn't have a description. \nAdd one"
-        }
+        
+       
         
         descriptionView.layer.borderWidth = 0.5
         descriptionView.layer.cornerRadius = descriptionView.frame.size.height / 10
@@ -46,37 +43,34 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
         view.addGestureRecognizer(tap)
-        selectedCategory = model?.category
-        
-            if selectedCategory == pickerData[0]{
-                picker.selectRow(0, inComponent: 0, animated: true)
-                
-            }else  if selectedCategory == pickerData[1]{
-                picker.selectRow(1, inComponent: 0, animated: true)
-            }else if selectedCategory == pickerData[2]{
-                picker.selectRow(2, inComponent: 0, animated: true)
-            } else  if selectedCategory == pickerData[3]{
-                picker.selectRow(3, inComponent: 0, animated: true)
-            } else  if selectedCategory == pickerData[4]{
-                picker.selectRow(4, inComponent: 0, animated: true)
-            }
-        
-        
-        
-    }
-    
-    @objc func dismissKeyboard(){
-        view.endEditing(true)
     }
     
 
-    
+    @objc func dismissKeyboard(){
+        view.endEditing(true)
+    }
     @IBAction func saveTapped(_ sender: Any) {
-        let item = model
-        let taskToUpdate = text.text
-        let descriptionUpdate = descriptionView.text
+       
+        let taskName = text.text
+        let description = descriptionView.text
+        let date = datePicker.date
+        let category = selectedCategory
         
-        dataProvider.updateItem(item: item!, newTaskName: taskToUpdate!, description: descriptionUpdate!,date: datePicker.date, category: selectedCategory)
+        let newItem = NewTask(context: dataProvider.context)
+        
+        newItem.task = taskName
+        newItem.taskDescription = description
+        
+        newItem.done = false
+        newItem.isArchived = false
+        newItem.date = date
+        newItem.category = category
+        do{
+            try dataProvider.context.save()
+           
+        }catch{
+          print("error saving")
+        }
         
      
         self.navigationController?.popToRootViewController( animated: true)
@@ -101,4 +95,7 @@ class EditVC: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource{
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         selectedCategory = pickerData[row]
     }
+
+ 
+
 }

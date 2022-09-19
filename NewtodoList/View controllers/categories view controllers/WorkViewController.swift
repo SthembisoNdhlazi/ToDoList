@@ -1,32 +1,33 @@
 //
-//  ArchiveViewController.swift
+//  WorkViewController.swift
 //  NewtodoList
 //
-//  Created by Sthembiso Ndhlazi on 2022/08/24.
+//  Created by Sthembiso Ndhlazi on 2022/09/07.
 //
 
 import UIKit
-import CoreData
+import SwiftUI
 
-class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class WorkViewController: UIViewController,UITableViewDelegate, UITableViewDataSource{
 
+    let dataProvider = DataProvider()
+    
     @IBOutlet weak var tableView: UITableView!
-   let dataProvider = DataProvider()
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // Do any additional setup after loading the view.
-        dataProvider.getArchivedItems()
-       title = "Archived tasks"
+        dataProvider.getWorkItems()
+       title = "Work tasks"
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "Cell")
         tableView.delegate = self
         tableView.dataSource = self
-        
     }
     
-   
+    override func viewWillAppear(_ animated: Bool) {
+        
+        dataProvider.getWorkItems()
+        tableView.reloadData()
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
@@ -35,26 +36,17 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     
     func tableView(_ tableView:UITableView, cellForRowAt indexPath: IndexPath)->UITableViewCell{
-        
-      
-            
         let model = dataProvider.models[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: "customCell", for: indexPath) as? CustomTableViewCell
     
         cell?.setUpCell(task: model.task!, taskDescription: model.taskDescription ?? "",specifiedDate: DateFormatter.localizedString(from: Date(), dateStyle: .short, timeStyle: .short),isDone: model.done, model: model)
-            
-            return cell!
-       
-      
+        cell!.isDoneDelegate = self
+        return cell!
     }
     
     func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
-        let delete = UIContextualAction(style: .destructive, title: "Delete"){ [self] (action, view, completionHandler) in
+        let delete = UIContextualAction(style: .normal, title: "Delete"){ [self] (action, view, completionHandler) in
             
-            let deleteAlert = UIAlertController(title: "Delete", message: "Are you sure you want to delete this task?", preferredStyle: .alert)
-            let cancelAction = UIAlertAction(title: "Cancel", style: .destructive)
-            let deleteAction = UIAlertAction(title: "Yes", style: .default){
-                [unowned self] action in
             let commit = dataProvider.models[indexPath.row]
             commit.managedObjectContext?.delete(commit)
             dataProvider.models.remove(at: indexPath.row)
@@ -64,21 +56,14 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
             } catch {
                 print("Couldn't save")
             }
-            }
-            deleteAlert.addAction(deleteAction)
-            deleteAlert.addAction(cancelAction)
-            
-            self.present(deleteAlert, animated: true)
         }
-           
-            
-        let archive = UIContextualAction(style: .normal, title: "Unarchive"){ [self] (action, view, completionHandler) in
+        let archive = UIContextualAction(style: .normal, title: "Archive"){ [self] (action, view, completionHandler) in
             
             let commit = dataProvider.models[indexPath.row]
             commit.isArchived.toggle()
             print(commit.isArchived)
         
-            dataProvider.getArchivedItems()
+            dataProvider.getWorkItems()
             tableView.reloadData()
             do{
                 try commit.managedObjectContext?.save()
@@ -98,6 +83,28 @@ class ArchiveViewController: UIViewController, UITableViewDelegate, UITableViewD
         
     }
     
-   
+    @IBAction func addTapped(_ sender: Any) {
+      
+    }
+    
+    func toggleDone(for index:Int){
+        
+        dataProvider.models[index].done.toggle()
+        do{
+            try dataProvider.context.save()
+        }catch{
+            
+        }
+    }
+}
 
+extension WorkViewController: isDone{
+    
+    func toggleIsDone(for cell: UITableViewCell) {
+        if let indexPath = tableView.indexPath(for: cell){
+            toggleDone(for: indexPath.row)
+            tableView.reloadData()
+            dataProvider.getWorkItems()
+        }
+    }
 }
